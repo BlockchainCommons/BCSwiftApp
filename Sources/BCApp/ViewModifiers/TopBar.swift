@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct TopBar<L, T>: ViewModifier where L: View, T: View {
+struct TopBar<L, T>: ViewModifier where L: View, T: View {
     let leading: L
     let trailing: T
 
