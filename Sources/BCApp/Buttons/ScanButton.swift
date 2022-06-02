@@ -12,9 +12,7 @@ public struct ScanButton: View {
             action()
         } label: {
             Image.scan
-                .padding(10)
         }
-        .font(.title)
         .accessibility(label: Text("Scan"))
     }
 }
