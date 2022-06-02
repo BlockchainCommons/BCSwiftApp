@@ -16,25 +16,27 @@ public struct UserGuideButton<Chapter: ChapterProtocol>: View {
         Button {
             isPresented = true
         } label: {
-            if showShortTitle,
-               let chapter = openToChapter,
-               let title = chapter.shortTitle
-            {
-                HStack(spacing: 5) {
+            VStack {
+                if showShortTitle,
+                   let chapter = openToChapter,
+                   let title = chapter.shortTitle
+                {
+                    HStack(spacing: 5) {
+                        Image.guide
+                        Text(title)
+                    }
+                    .font(.caption)
+                    .lineLimit(1)
+                } else {
                     Image.guide
-                    Text(title)
                 }
-                .font(.caption)
-                .lineLimit(1)
-            } else {
-                Image.guide
             }
+            .padding(10)
         }
         .sheet(isPresented: $isPresented) {
             UserGuide(isPresented: $isPresented, openToChapter: openToChapter)
         }
         .font(font)
-        .padding([.top, .bottom, .trailing], 10)
         .accessibility(label: Text("Documentation"))
     }
 }
