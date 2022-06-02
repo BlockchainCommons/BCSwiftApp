@@ -95,6 +95,7 @@ extension Image {
 
     // Objects
     public static var seed: Image { Image("seed.circle", bundle: Bundle.module) }
+    public static var transaction: Image { Image("transaction.circle", bundle: Bundle.module) }
     public static var key: Image { Image("key.fill.circle", bundle: Bundle.module) }
     public static var privateKey: Image { Image("key.prv.circle", bundle: Bundle.module) }
     public static var publicKey: Image { Image("key.pub.circle", bundle: Bundle.module) }
