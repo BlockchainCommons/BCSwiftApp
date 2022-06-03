@@ -1,55 +1,22 @@
 import SwiftUI
 import BCFoundation
 
-public enum ModelObjectType {
-    case seed
-    case privateHDKey
-    case publicHDKey
-    case privateECKey
-    case address
+public struct ModelObjectType {
+    public let name: String
+    public let type: String
+    public let icon: AnyView
+    
+    public init(name: String, type: String, icon: AnyView) {
+        self.name = name
+        self.type = type
+        self.icon = icon
+    }
+}
 
-    public var icon: AnyView {
-        switch self {
-        case .seed:
-            return Image.seed.icon().eraseToAnyView()
-        case .privateHDKey:
-            return KeyType.private.icon
-        case .publicHDKey:
-            return KeyType.public.icon
-        case .privateECKey:
-            return KeyType.private.icon
-        case .address:
-            return Image.address.icon().eraseToAnyView()
-        }
-    }
-    
-    public var name: String {
-        switch self {
-        case .seed:
-            return "Seed"
-        case .privateHDKey:
-            return "Private HD Key"
-        case .publicHDKey:
-            return "Public HD Key"
-        case .privateECKey:
-            return "Private Key"
-        case .address:
-            return "Address"
-        }
-    }
-    
-    public var type: String {
-        switch self {
-        case .seed:
-            return "Seed"
-        case .privateHDKey:
-            return "PrivateHDKey"
-        case .publicHDKey:
-            return "PublicHDKey"
-        case .privateECKey:
-            return "PrivateECKey"
-        case .address:
-            return "Address"
-        }
-    }
+public extension ModelObjectType {
+    static let seed = ModelObjectType(name: "Seed", type: "Seed", icon: Image.seed.icon().eraseToAnyView())
+    static let privateHDKey = ModelObjectType(name: "Private HD Key", type: "PrivateHDKey", icon: KeyType.private.icon)
+    static let publicHDKey = ModelObjectType(name: "Public HD Key", type: "PublicHDKey", icon: KeyType.public.icon)
+    static let privateECKey = ModelObjectType(name: "Private Key", type: "PrivateECKey", icon: KeyType.private.icon)
+    static let address = ModelObjectType(name: "Address", type: "Address", icon: Image.address.icon().eraseToAnyView())
 }
