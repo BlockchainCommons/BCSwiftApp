@@ -1,7 +1,7 @@
 import Foundation
 import LifeHash
 
-public protocol ObjectIdentifiable: Fingerprintable, Printable {
+public protocol ObjectIdentifiable: Fingerprintable, Equatable {
     var modelObjectType: ModelObjectType { get }
     var name: String { get set }
     var subtypes: [ModelSubtype] { get }
@@ -32,9 +32,5 @@ public extension ObjectIdentifiable {
     
     var exportFields: ExportFields {
         [:]
-    }
-    
-    var printExportFields: ExportFields {
-        exportFields
     }
 }
