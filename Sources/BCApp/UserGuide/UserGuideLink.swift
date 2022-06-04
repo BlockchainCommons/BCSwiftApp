@@ -14,7 +14,13 @@ public struct UserGuideLink<Chapter: ChapterProtocol>: View {
     
     public var body: some View {
         NavigationLink(
-            destination: LazyView(UserGuidePage(chapter: chapter).navigationBarItems(trailing: DoneButton($isPresented))),
+            destination: LazyView(UserGuidePage(chapter: chapter)
+                .toolbar {
+                    ToolbarItem(placement: .confirmationAction) {
+                        DoneButton($isPresented)
+                    }
+                }
+            ),
             tag: chapter,
             selection: $currentChapter)
         {

@@ -21,11 +21,12 @@ public struct UserGuide<Chapter: ChapterProtocol>: View {
             }
             .font(.body)
             .navigationTitle("Contents")
-            .navigationBarItems(
-                trailing:
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
                     DoneButton($isPresented)
-                    .keyboardShortcut(.cancelAction)
-            )
+                        .keyboardShortcut(.cancelAction)
+                }
+            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
@@ -39,7 +40,11 @@ public struct UserGuide<Chapter: ChapterProtocol>: View {
     func section<Content>(title: String, content: Content) -> some View where Content: View {
         NavigationLink(destination:
                         content
-                        .navigationBarItems(trailing: DoneButton($isPresented))
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    DoneButton($isPresented)
+                }
+            }
         ) {
             Text(title)
         }

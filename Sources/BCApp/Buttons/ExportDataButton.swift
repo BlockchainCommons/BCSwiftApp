@@ -5,13 +5,16 @@ public struct ExportDataButton<Content>: View where Content: View {
     let isSensitive: Bool
     let action: () -> Void
     
+    @Environment(\.isEnabled)
+    private var isEnabled: Bool
+    
     public var body: some View {
         Button {
             action()
         } label: {
             content
                 .font(Font.system(.body).bold())
-                .foregroundColor(isSensitive ? .yellowLightSafe : .accentColor)
+                .foregroundColor((isEnabled && isSensitive) ? .yellowLightSafe : .accentColor)
         }
         .formSectionStyle()
     }
