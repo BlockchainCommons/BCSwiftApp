@@ -37,6 +37,12 @@ public final class LifeHashNameGenerator: ObservableObject {
         let words = Lorem.bytewords(2)
         return [colorName, words].joined(separator: " ").capitalized
     }
+    
+    public static func generate(from item: Fingerprintable) -> String {
+        let lifehashState = LifeHashState(item.fingerprint, version: .version2, generateAsync: false)
+        let generator = LifeHashNameGenerator(lifeHashState: lifehashState)
+        return generator.next()
+    }
 }
 
 public extension Lorem {
