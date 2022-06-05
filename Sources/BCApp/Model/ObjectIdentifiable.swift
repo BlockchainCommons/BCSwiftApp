@@ -1,5 +1,6 @@
 import Foundation
 import LifeHash
+import WolfBase
 
 public protocol ObjectIdentifiable: Fingerprintable, Equatable {
     var modelObjectType: ModelObjectType { get }
@@ -32,5 +33,13 @@ public extension ObjectIdentifiable {
     
     var exportFields: ExportFields {
         [:]
+    }
+    
+    var subtypes: [ModelSubtype] {
+        []
+    }
+    
+    var sizeLimitedQRString: (String, Bool) {
+        unimplemented()
     }
 }
