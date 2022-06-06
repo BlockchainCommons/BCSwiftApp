@@ -103,6 +103,7 @@ extension Image {
     public static var outputDescriptor: Image { Image(systemName: "rhombus") }
     public static var outputBundle: Image { Image(systemName: "square.stack.3d.up") }
     public static var missing: Image { Image(systemName: "questionmark.circle") }
+    public static var policy: Image { Image(systemName: "checkmark.shield") }
 
     // Fields
     public static var name: Image { Image(systemName: "quote.bubble") }
