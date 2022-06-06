@@ -8,6 +8,17 @@ public enum Validation {
     case invalid(String?)
 }
 
+public extension Validation {
+    var isValid: Bool {
+        switch self {
+        case .valid:
+            return true
+        default:
+            return false
+        }
+    }
+}
+
 public typealias ValidationPublisher = AnyPublisher<Validation, Never>
 
 extension Publisher {
