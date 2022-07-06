@@ -24,6 +24,7 @@ let package = Package(
         .package(url: "https://github.com/gonzalezreal/MarkdownUI.git", from: "0.1.0"),
         .package(url: "https://github.com/wolfmcnally/UIImageColors.git", from: "2.0.0"),
         .package(url: "https://github.com/wolfmcnally/WolfColor.git", from: "6.0.0"),
+        .package(url: "https://github.com/globulus/swiftui-flow-layout.git", from: "1.0.0")
     ],
     targets: [
         .target(
@@ -37,6 +38,7 @@ let package = Package(
                 "MarkdownUI",
                 "UIImageColors",
                 "WolfColor",
+                .product(name: "SwiftUIFlowLayout", package: "swiftui-flow-layout"),
                 .product(name: "BCFoundation", package: "BCSwiftFoundation"),
                 .product(name: "NFC", package: "BCSwiftNFC"),
             ],
