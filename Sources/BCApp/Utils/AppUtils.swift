@@ -4,6 +4,8 @@ import SwiftUI
 import os
 
 public struct Application {
+    public static let maxFragmentLen = 600
+
     public static let bundleIdentifier = Bundle.main.bundleIdentifier!
 
     public static let isTakingSnapshot = ProcessInfo.processInfo.arguments.contains("SNAPSHOT")

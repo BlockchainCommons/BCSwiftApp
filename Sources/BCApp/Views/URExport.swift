@@ -12,15 +12,13 @@ public struct URExport: View {
     let name: String
     let title: String
     let fields: ExportFields?
-    let maxFragmentLen: Int
     @State private var activityParams: ActivityParams?
 
-    public init(isPresented: Binding<Bool>, isSensitive: Bool, ur: UR, name: String, maxFragmentLen: Int, fields: ExportFields? = nil, items: [AnyView] = []) {
+    public init(isPresented: Binding<Bool>, isSensitive: Bool, ur: UR, name: String, fields: ExportFields? = nil, items: [AnyView] = []) {
         self._isPresented = isPresented
         self.isSensitive = isSensitive
         self.ur = ur
         self.name = name
-        self.maxFragmentLen = maxFragmentLen
         var fields = fields ?? [:]
         fields[.format] = "UR"
         self.fields = fields
@@ -51,8 +49,7 @@ public struct URExport: View {
                 URDisplay(
                     ur: ur,
                     name: name,
-                    fields: fields,
-                    maxFragmentLen: maxFragmentLen
+                    fields: fields
                 )
 #if targetEnvironment(macCatalyst)
                 FlowLayout(mode: .vstack, items: flowItems, viewMapping: { $0 })
@@ -93,7 +90,6 @@ struct URExport_Previews: PreviewProvider {
                 )
             ).ur,
             name: seed.name,
-            maxFragmentLen: 800,
             fields: [:]
         )
             .darkMode()

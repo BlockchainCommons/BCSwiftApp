@@ -8,8 +8,8 @@ public struct URDisplay: View {
     let name: String
     let fields: ExportFields?
 
-    public init(ur: UR, name: String, fields: ExportFields? = nil, maxFragmentLen: Int) {
-        self._displayState = StateObject(wrappedValue: URDisplayState(ur: ur, maxFragmentLen: maxFragmentLen))
+    public init(ur: UR, name: String, fields: ExportFields? = nil) {
+        self._displayState = StateObject(wrappedValue: URDisplayState(ur: ur, maxFragmentLen: Application.maxFragmentLen))
         self.name = name
         var fields = fields ?? [:]
         fields[.format] = "UR"
