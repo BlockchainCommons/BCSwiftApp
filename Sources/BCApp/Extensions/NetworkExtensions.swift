@@ -36,17 +36,6 @@ public extension Network {
             Text(name)
         }
     }
-    
-    init?(id: String) {
-        switch id {
-        case "network-main":
-            self = .mainnet
-        case "network-test":
-            self = .testnet
-        default:
-            return nil
-        }
-    }
 
     var subtype: ModelSubtype {
         ModelSubtype(id: id, icon: icon)
