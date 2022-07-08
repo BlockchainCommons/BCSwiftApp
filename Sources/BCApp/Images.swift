@@ -104,6 +104,9 @@ extension Image {
     public static var outputBundle: Image { Image(systemName: "square.stack.3d.up") }
     public static var missing: Image { Image(systemName: "questionmark.circle") }
     public static var policy: Image { Image(systemName: "checkmark.shield") }
+    public static var questionmark: Image { Image(systemName: "questionmark") }
+    public static var ellipsis: Image { Image(systemName: "ellipsis") }
+    public static var error: Image { Image(systemName: "xmark.octagon") }
 
     // Fields
     public static var name: Image { Image(systemName: "quote.bubble") }

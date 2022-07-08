@@ -21,7 +21,7 @@ let package = Package(
         .package(url: "https://github.com/wolfmcnally/WolfLorem.git", from: "2.0.0"),
         .package(url: "https://github.com/BlockchainCommons/URUI.git", from: "4.0.0"),
         .package(url: "https://github.com/BlockchainCommons/BCSwiftNFC.git", from: "2.0.0"),
-        .package(url: "https://github.com/gonzalezreal/MarkdownUI.git", from: "0.1.0"),
+        .package(url: "https://github.com/gonzalezreal/MarkdownUI.git", from: "1.1.0"),
         .package(url: "https://github.com/wolfmcnally/UIImageColors.git", from: "2.0.0"),
         .package(url: "https://github.com/wolfmcnally/WolfColor.git", from: "6.0.0"),
         .package(url: "https://github.com/globulus/swiftui-flow-layout.git", from: "1.0.0")

@@ -45,4 +45,5 @@ public extension Color {
     static let yellowLightSafe = Color(.yellowLightSafe)
     static let darkGreenBackground = Color(.darkGreenBackground)
     static let lightRedBackground = Color(.lightRedBackground)
+    static let appAccentColor = Color("AccentColor", bundle: .main)
 }

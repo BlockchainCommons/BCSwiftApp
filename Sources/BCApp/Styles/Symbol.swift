@@ -42,4 +42,8 @@ public struct Symbol: View {
     public static var signatureNeeded: Symbol {
         Symbol(icon: .signatureNeeded, renderingMode: .hierarchical, color: .teal)
     }
+    
+    public static var outputDescriptor: Symbol {
+        Symbol(icon: .outputDescriptor, renderingMode: .monochrome, color: .blue)
+    }
 }

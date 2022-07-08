@@ -18,6 +18,15 @@ public extension KeyType {
                 .eraseToAnyView()
         }
     }
+    
+    var image: Image {
+        switch self {
+        case .private:
+            return Image.privateKey
+        case .public:
+            return Image.publicKey
+        }
+    }
 }
 
 extension KeyType: Segment {
