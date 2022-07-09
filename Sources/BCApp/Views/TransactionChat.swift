@@ -10,35 +10,50 @@ public struct TransactionChat<Content>: View where Content: View {
     }
     
     public var body: some View {
+        let radius: Binding<Double> = .constant(30)
         HStack {
-            VStack {
-                ChatBubble(direction: .leading, background: Color.secondary.opacity(0.4)) {
-                    content()
-                        .padding(10)
-                        .font(.title)
-                }
-//                Spacer()
-//                    .frame(height: 10)
+            ChatBubble(direction: .leading, fill: Color.secondary.opacity(0.4), stroke: .secondary, lineWidth: 3, radius: radius) {
+                content()
+                    .padding(5)
+                    .font(.title)
             }
             Spacer()
-            VStack {
-//                Spacer()
-//                    .frame(height: 10)
+            Group {
                 if cannotRespond {
-                    ChatBubble(direction: .trailing, background: Color.red.opacity(0.4)) {
+                    ChatBubble(direction: .trailing, fill: Color.red.opacity(0.4), stroke: .red, lineWidth: 3, radius: radius) {
                         Image.error
                             .padding([.leading, .trailing], 20)
-                            .padding([.top, .bottom], 10)
-                            .font(.title)
+                            .padding([.top, .bottom], 5)
                     }
                 } else {
-                    ChatBubble(direction: .trailing, background: Color.accentColor.opacity(0.2)) {
+                    ChatBubble(direction: .trailing, fill: Color.accentColor.opacity(0.4), stroke: .accentColor, lineWidth: 3, radius: radius) {
                         Image.ellipsis
-                            .padding(20)
-                            .font(.title)
+                            .padding([.leading, .trailing], 20)
+                            .padding([.top, .bottom], 15)
                     }
                 }
             }
+            .font(.title)
+            .alignmentGuide(VerticalAlignment.center, computeValue: { _ in 0 })
         }
     }
 }
+
+#if DEBUG
+
+struct TransactionChat_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack {
+            TransactionChat(cannotRespond: false) {
+                Text("Hello")
+            }
+            TransactionChat(cannotRespond: true) {
+                Text("Hello")
+            }
+        }
+        .padding()
+        .darkMode()
+    }
+}
+
+#endif

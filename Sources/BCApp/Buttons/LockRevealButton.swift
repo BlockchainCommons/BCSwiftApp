@@ -39,7 +39,7 @@ public struct LockRevealButton<RevealedContent, HiddenContent>: View where Revea
     @ViewBuilder
     var framedContent: some View {
         if isChatBubble {
-            ChatBubble(direction: .trailing, background: Color.accentColor.opacity(0.2)) {
+            ChatBubble(direction: .trailing, fill: Color.accentColor.opacity(0.2)) {
                 content
             }
         } else {

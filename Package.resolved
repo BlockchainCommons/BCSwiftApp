@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/gonzalezreal/AttributedText",
       "state" : {
-        "revision" : "c345033e22d5a1cd0e9fe0ec405cc809a8349586",
-        "version" : "0.3.1"
+        "revision" : "2dc2d7864e0fee4b524a5850d7d7cf9a7eeda0fc",
+        "version" : "1.0.0"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftFoundation",
       "state" : {
-        "revision" : "d7d0f2a0f599528a0dbd42cb55ad70087aa71654",
-        "version" : "3.1.0"
+        "revision" : "24f4bd7b3def7f48c4cc84a92fee94feccad4445",
+        "version" : "3.4.1"
       }
     },
     {
@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/combine-schedulers",
       "state" : {
-        "revision" : "4cf088c29a20f52be0f2ca54992b492c54e0076b",
-        "version" : "0.5.3"
+        "revision" : "0ba3a562716efabb585ccb169450c5389107286b",
+        "version" : "0.6.0"
       }
     },
     {
@@ -104,8 +104,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/LifeHash.git",
       "state" : {
-        "revision" : "f9a6b2a843778c0e4d7ebab096e5959c142e96c9",
-        "version" : "6.2.1"
+        "revision" : "dca95ce6a933810abf2b368afedf89562121b596",
+        "version" : "6.3.0"
       }
     },
     {
@@ -113,8 +113,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/gonzalezreal/MarkdownUI.git",
       "state" : {
-        "revision" : "29d94710545952dd4c724cc2ca901848eef54ded",
-        "version" : "0.5.2"
+        "revision" : "4c164300337a35d002188a83a878346819b203c0",
+        "version" : "1.1.0"
       }
     },
     {
@@ -122,8 +122,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/gonzalezreal/NetworkImage",
       "state" : {
-        "revision" : "04167e81ed89a14b5da9b856ead306b969bb5abd",
-        "version" : "3.1.2"
+        "revision" : "c97f83e771c95186af80ef6118f158852a9e54be",
+        "version" : "4.0.1"
       }
     },
     {
@@ -145,15 +145,6 @@
       }
     },
     {
-      "identity" : "swift-cmark",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SwiftDocOrg/swift-cmark.git",
-      "state" : {
-        "revision" : "9c8096a23f44794bde297452d87c455fc4f76d42",
-        "version" : "0.29.0+20210102.9c8096a"
-      }
-    },
-    {
       "identity" : "swift-numerics",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-numerics",
@@ -167,8 +158,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/gonzalezreal/SwiftCommonMark",
       "state" : {
-        "revision" : "ed60da54305c244d0f77bc8d08495e04161e96a4",
-        "version" : "0.1.2"
+        "revision" : "ed252beaddecce28ea6363f800c773d6169011b8",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "swiftui-flow-layout",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/globulus/swiftui-flow-layout.git",
+      "state" : {
+        "revision" : "96f9a3fdb83fd0b73525f6324b8a35ef0dc235fd",
+        "version" : "1.0.4"
       }
     },
     {
@@ -185,8 +185,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/URKit.git",
       "state" : {
-        "revision" : "0c48811b55ffb641172d40e17facf2a3fcef6694",
-        "version" : "7.0.2"
+        "revision" : "6b650d315c15b42b46cf9633352d236035a72758",
+        "version" : "7.0.3"
       }
     },
     {
@@ -203,8 +203,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/WolfMcNally/WolfBase",
       "state" : {
-        "revision" : "4f555a5189e0ee3136be2d9c84336d3953893304",
-        "version" : "4.1.0"
+        "revision" : "4aa155e69d2c4d8bcc17a8840b7a178882fcbfb1",
+        "version" : "4.2.0"
       }
     },
     {
@@ -230,8 +230,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wolfmcnally/WolfSwiftUI.git",
       "state" : {
-        "revision" : "ab6d27548fa577e039d29c99a5a256d4dba4185f",
-        "version" : "2.1.0"
+        "revision" : "ffbc163dd5ce6ea82be9e1890ee59e1dee2ce80d",
+        "version" : "2.2.0"
       }
     },
     {
@@ -239,8 +239,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
       "state" : {
-        "revision" : "50a70a9d3583fe228ce672e8923010c8df2deddd",
-        "version" : "0.2.1"
+        "revision" : "ef8e14e7ce1c0c304c644c6ba365d06c468ded6b",
+        "version" : "0.3.3"
       }
     }
   ],
