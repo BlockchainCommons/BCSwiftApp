@@ -10,7 +10,7 @@ public struct TransactionChat<Content>: View where Content: View {
     }
     
     public var body: some View {
-        let radius: Binding<Double> = .constant(30)
+        let radius = 30.0
         HStack {
             ChatBubble(direction: .leading, fill: Color.secondary.opacity(0.4), stroke: .secondary, lineWidth: 3, radius: radius) {
                 content()
@@ -22,12 +22,14 @@ public struct TransactionChat<Content>: View where Content: View {
                 if cannotRespond {
                     ChatBubble(direction: .trailing, fill: Color.red.opacity(0.4), stroke: .red, lineWidth: 3, radius: radius) {
                         Image.error
+                            .foregroundColor(.red)
                             .padding([.leading, .trailing], 20)
                             .padding([.top, .bottom], 5)
                     }
                 } else {
                     ChatBubble(direction: .trailing, fill: Color.accentColor.opacity(0.4), stroke: .accentColor, lineWidth: 3, radius: radius) {
                         Image.ellipsis
+                            .foregroundColor(.accentColor)
                             .padding([.leading, .trailing], 20)
                             .padding([.top, .bottom], 15)
                     }

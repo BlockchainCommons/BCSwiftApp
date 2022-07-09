@@ -14,7 +14,7 @@ public struct ChatBubble<Content, Fill>: View where Content: View, Fill: View {
         case trailing
     }
     
-    public init(direction: Direction, fill: Fill, stroke: Color = .primary, lineWidth: Double = 0, radius: Binding<Double> = .constant(20), @ViewBuilder content: @escaping () -> Content) {
+    public init(direction: Direction, fill: Fill, stroke: Color = .primary, lineWidth: Double = 0, radius: Binding<Double>, @ViewBuilder content: @escaping () -> Content) {
         self.content = content
         self.fill = fill
         self.stroke = stroke
@@ -22,7 +22,11 @@ public struct ChatBubble<Content, Fill>: View where Content: View, Fill: View {
         self.direction = direction
         self._radius = radius
     }
-    
+
+    public init(direction: Direction, fill: Fill, stroke: Color = .primary, lineWidth: Double = 0, radius: Double = 20, @ViewBuilder content: @escaping () -> Content) {
+        self.init(direction: direction, fill: fill, stroke: stroke, lineWidth: lineWidth, radius: .constant(radius), content: content)
+    }
+
     public var body: some View {
         HStack {
             if direction == .trailing {
@@ -31,7 +35,7 @@ public struct ChatBubble<Content, Fill>: View where Content: View, Fill: View {
             ZStack {
                 let bubble = BubbleShape(direction: direction, layoutDirection: layoutDirection, radius: radius)
                 content()
-                    .padding(max(10, radius / 2))
+                    .padding(max(10, radius * 0.25))
                     .padding(.leading, direction == .leading ? radius * 0.2 : 0)
                     .padding(.trailing, direction == .trailing ? radius * 0.2 : 0)
                     .background(
@@ -156,6 +160,10 @@ public struct ChatBubble<Content, Fill>: View where Content: View, Fill: View {
 public extension ChatBubble where Fill == EmptyView {
     init(direction: Direction, stroke: Color = .primary, lineWidth: Double = 0, radius: Binding<Double> = .constant(20), @ViewBuilder content: @escaping () -> Content) {
         self.init(direction: direction, fill: EmptyView(), stroke: stroke, lineWidth: lineWidth, radius: radius, content: content)
+    }
+
+    public init(direction: Direction, stroke: Color = .primary, lineWidth: Double = 0, radius: Double = 20, @ViewBuilder content: @escaping () -> Content) {
+        self.init(direction: direction, fill: EmptyView(), stroke: stroke, lineWidth: lineWidth, radius: .constant(radius), content: content)
     }
 }
 
