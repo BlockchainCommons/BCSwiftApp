@@ -11,7 +11,7 @@ final class ScanModel: ObservableObject {
     
     func receive(urString: String) {
         do {
-            try receive(ur: UR(urString: urString))
+            try receive(ur: UR(urString: urString.trim()))
         } catch {
             resultPublisher.send(.failure(GeneralError("Unrecognized format.")))
         }
