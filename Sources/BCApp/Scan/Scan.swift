@@ -16,6 +16,7 @@ public struct Scan: View {
     let prompt: String
     let caption: String?
     let initialURL: URL?
+    let allowPSBT: Bool
     let onScanResult: (ScanResult) -> Void
     
     let codesPublisher: URCodesPublisher
@@ -40,11 +41,12 @@ public struct Scan: View {
         var id: Int { rawValue }
     }
 
-    public init(isPresented: Binding<Bool>, prompt: String, caption: String? = nil, initalURL: URL? = nil, onScanResult: @escaping (ScanResult) -> Void) {
+    public init(isPresented: Binding<Bool>, prompt: String, caption: String? = nil, initalURL: URL? = nil, allowPSBT: Bool = false, onScanResult: @escaping (ScanResult) -> Void) {
         self._isPresented = isPresented
         self.prompt = prompt
         self.caption = caption
         self.initialURL = initalURL
+        self.allowPSBT = allowPSBT
         self.onScanResult = onScanResult
         let sskrDecoder = SSKRDecoder {
             Feedback.progress()
@@ -127,14 +129,14 @@ public struct Scan: View {
                     for url in urls {
                         if url.isImage {
                             imageURLs.append(url)
-                        } else if url.isPSBT {
+                        } else if allowPSBT && url.isPSBT {
                             psbtURLs.append(url)
                         } else {
                             otherURLs.append(url)
                         }
                     }
                     
-                    if let psbtURL = psbtURLs.first {
+                    if allowPSBT, let psbtURL = psbtURLs.first {
                         processPSBTFile(psbtURL)
                     } else if !imageURLs.isEmpty {
                         processLoadedImages(imageURLs)
@@ -251,6 +253,7 @@ public struct Scan: View {
     
     func processImportLine(_ line: String) -> UR? {
         if
+            allowPSBT,
             let decodedBase64 = Data(base64: line),
             let psbt = PSBT(decodedBase64)
         {
@@ -399,7 +402,7 @@ public struct Scan: View {
                     case .restricted:
                         videoPlaceholder(Text("Permission to use the camera is restricted on this device."))
                     case .denied:
-                        videoPlaceholder(Text("The settings for this app deny use of the camera. You can change this in the **Settings** app by visiting **Privacy** > **Camera** > **Seed Tool**."))
+                        videoPlaceholder(Text("The settings for this app deny use of the camera. You can change this in the **Settings** app by visiting **Privacy** > **Camera** > **\(Application.appDisplayName)**."))
                     case .authorized:
                         videoView()
                     @unknown default:
@@ -413,7 +416,7 @@ public struct Scan: View {
 
             ScrollView {
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Paste a textual UR from the clipboard, or choose one or more images containing UR QR codes.")
+                    Text("Paste a textual UR from the clipboard, read a UR from an NFC tag (on supported devices) or choose one or more images containing UR QR codes.")
                         .lineLimit(2)
                         .minimumScaleFactor(0.5)
 
@@ -474,7 +477,7 @@ public struct Scan: View {
         ExportDataButton("Paste", icon: Image.paste, isSensitive: false) {
             do {
                 if let string = UIPasteboard.general.string?.trim() {
-                    if let data = Data(base64: string) {
+                    if allowPSBT, let data = Data(base64: string) {
                         guard let psbt = PSBT(data) else {
                             throw GeneralError("Invalid PSBT format.")
                         }
@@ -484,7 +487,13 @@ public struct Scan: View {
                         try processImportString(string)
                     }
                 } else {
-                    failure(GeneralError("The clipboard does not contain a valid ur:crypto-seed, ur:crypto-request, ur:crypto-sskr, ur:crypto-psbt, or Base64-encoded PSBT."))
+                    let message: String
+                    if allowPSBT {
+                        message = "The clipboard does not contain a valid UR or Base64-encoded PSBT."
+                    } else {
+                        message = "The clipboard does not contain a valid UR."
+                    }
+                    failure(GeneralError(message))
                 }
             } catch {
                 failure(error)

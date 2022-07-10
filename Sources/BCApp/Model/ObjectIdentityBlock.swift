@@ -177,7 +177,7 @@ public struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
         fields[.format] = "Hex"
         
         return Text(digestIdentifier)
-            .monospaced()
+            .appMonospaced()
             .bold()
             .lineLimit(1)
             .minimumScaleFactor(0.5)

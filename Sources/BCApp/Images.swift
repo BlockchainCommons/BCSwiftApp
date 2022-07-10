@@ -135,6 +135,8 @@ extension Image {
     public static var txFee: Image { Image(systemName: "lock.circle") }
     public static var signature: Image { Image(systemName: "signature") }
     public static var signatureNeeded: Image { Image(systemName: "ellipsis.circle") }
+    public static var sentItem: Image { Image(systemName: "bubble.right") }
+    public static var receivedItem: Image { Image(systemName: "bubble.left") }
     
     // Misc
     public static func circled(_ s: String) -> Image { Image(systemName: "\(s).circle") }

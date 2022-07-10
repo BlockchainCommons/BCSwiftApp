@@ -1,7 +1,7 @@
 import SwiftUI
 import WolfSwiftUI
 
-public struct DisplayRequest<Prompt>: View where Prompt: View {
+public struct DisplayTransaction<Prompt>: View where Prompt: View {
     @Binding var isPresented: Bool
     let isSensitive: Bool
     let ur: UR
@@ -84,7 +84,7 @@ struct DisplayRequest_Previews: PreviewProvider {
     static let seed = Seed()
     
     static var previews: some View {
-        DisplayRequest(
+        DisplayTransaction(
             isPresented: .constant(true), isSensitive: false,
             ur: TransactionRequest(
                 body: .outputDescriptor(

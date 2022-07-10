@@ -16,7 +16,7 @@ public struct ExportDataButton<Content>: View where Content: View {
                 .font(Font.system(.body).bold())
                 .foregroundColor((isEnabled && isSensitive) ? .yellowLightSafe : .accentColor)
         }
-        .formSectionStyle()
+        .buttonStyle(.bordered)
     }
 }
 

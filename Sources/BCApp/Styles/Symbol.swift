@@ -4,11 +4,20 @@ public struct Symbol: View {
     public let icon: Image
     public let renderingMode: SymbolRenderingMode
     public let color: Color
+    public let flipsForRightToLeftLayoutDirection: Bool
+    
+    public init(icon: Image, renderingMode: SymbolRenderingMode, color: Color, flipsForRightToLeftLayoutDirection: Bool = false) {
+        self.icon = icon
+        self.renderingMode = renderingMode
+        self.color = color
+        self.flipsForRightToLeftLayoutDirection = flipsForRightToLeftLayoutDirection
+    }
     
     public var body: some View {
         icon
             .symbolRenderingMode(renderingMode)
             .foregroundStyle(color)
+            .flipsForRightToLeftLayoutDirection(flipsForRightToLeftLayoutDirection)
     }
     
     public static var txSent: Symbol {
@@ -45,5 +54,13 @@ public struct Symbol: View {
     
     public static var outputDescriptor: Symbol {
         Symbol(icon: .outputDescriptor, renderingMode: .monochrome, color: .blue)
+    }
+    
+    public static var sentItem: Symbol {
+        Symbol(icon: .sentItem, renderingMode: .monochrome, color: .accentColor)
+    }
+    
+    public static var receivedItem: Symbol {
+        Symbol(icon: .receivedItem, renderingMode: .monochrome, color: .primary)
     }
 }

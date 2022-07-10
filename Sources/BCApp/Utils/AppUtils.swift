@@ -18,6 +18,10 @@ public struct Application {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
     }()
     
+    public static let appDisplayName: String = {
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
+    }()
+
     public static let fullVersion: String = {
         "\(version) (\(buildNumber))"
     }()
