@@ -13,6 +13,8 @@ fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, categor
 
 public struct Scan: View {
     @Binding var isPresented: Bool
+    let prompt: String
+    let caption: String?
     let initialURL: URL?
     let onScanResult: (ScanResult) -> Void
     
@@ -38,8 +40,10 @@ public struct Scan: View {
         var id: Int { rawValue }
     }
 
-    public init(isPresented: Binding<Bool>, initalURL: URL? = nil, onScanResult: @escaping (ScanResult) -> Void) {
+    public init(isPresented: Binding<Bool>, prompt: String, caption: String? = nil, initalURL: URL? = nil, onScanResult: @escaping (ScanResult) -> Void) {
         self._isPresented = isPresented
+        self.prompt = prompt
+        self.caption = caption
         self.initialURL = initalURL
         self.onScanResult = onScanResult
         let sskrDecoder = SSKRDecoder {
@@ -379,7 +383,7 @@ public struct Scan: View {
         VStack(alignment: .leading, spacing: 10) {
             VStack(alignment: .leading) {
                 HStack(alignment: .center) {
-                    Text("Scan a QR code to import a seed or respond to a request from another device.")
+                    Text(prompt)
                         .lineLimit(2)
                         .minimumScaleFactor(0.5)
                     Spacer()
@@ -421,8 +425,10 @@ public struct Scan: View {
                     ]) { $0 }
                     .frame(maxWidth: .infinity)
 
-                    Text("Acceptable types include ur:crypto-seed, ur:crypto-request, ur:crypto-sskr, ur:crypto-psbt, or Base64-encoded PSBT.")
-                        .font(.caption)
+                    if let caption {
+                        Text(caption)
+                            .font(.caption)
+                    }
                 }
             }
         }
@@ -521,7 +527,7 @@ public struct Scan: View {
 
 struct Scan_Previews: PreviewProvider {
     static var previews: some View {
-        Scan(isPresented: .constant(true)) { scanResult in
+        Scan(isPresented: .constant(true), prompt: "Prompt", caption: "Caption") { scanResult in
         }
 .previewInterfaceOrientation(.portraitUpsideDown)
     }
