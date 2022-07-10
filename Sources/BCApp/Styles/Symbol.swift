@@ -63,4 +63,8 @@ public struct Symbol: View {
     public static var receivedItem: Symbol {
         Symbol(icon: .receivedItem, renderingMode: .monochrome, color: .primary)
     }
+    
+    public static var error: Symbol {
+        Symbol(icon: .error, renderingMode: .hierarchical, color: .red)
+    }
 }

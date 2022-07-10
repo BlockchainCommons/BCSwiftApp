@@ -268,30 +268,17 @@ public struct Scan: View {
         return nil
     }
     
-    var resultView: some View {
-        ZStack {
-            Rectangle()
-                .fill(Color.clear)
-            
-            switch scanResult! {
-            case .failure(let error):
-                VStack{
-                    Image.operation(success: false)
-                        .resizable()
-                        .foregroundColor(.red)
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 100, height: 100)
-                    Text(error.localizedDescription)
-                }
-            default:
-                Image.operation(success: true)
-                    .resizable()
-                    .foregroundColor(.green)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 100, height: 100)
-            }
+    var result: Result<Void, Error> {
+        switch scanResult! {
+        case .failure(let error):
+            return .failure(error)
+        default:
+            return .success(())
         }
-        .padding()
+    }
+    
+    var resultView: some View {
+        ResultView(result: result)
     }
     
     func sskrMemberView(color: Color) -> some View {
@@ -437,7 +424,7 @@ public struct Scan: View {
         }
         .onReceive(model.resultPublisher) { scanResult in
             switch scanResult {
-            case .seed, .request:
+            case .seed, .request, .response:
                 Feedback.success()
                 self.scanResult = scanResult
                 isPresented = false

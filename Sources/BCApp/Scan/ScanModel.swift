@@ -26,6 +26,9 @@ final class ScanModel: ObservableObject {
             case "crypto-request", "crypto-psbt":
                 let request = try TransactionRequest(ur: ur)
                 resultPublisher.send(.request(request))
+            case "crypto-response":
+                let response = try TransactionResponse(ur: ur)
+                resultPublisher.send(.response(response))
             case "crypto-sskr":
                 if
                     let secret = try sskrDecoder.addShare(ur: ur),
