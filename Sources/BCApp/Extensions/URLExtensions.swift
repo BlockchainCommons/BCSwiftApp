@@ -1,5 +1,16 @@
 import Foundation
 import UIKit
+import UniformTypeIdentifiers
+
+public extension UTType {
+    static var psbt = UTType("com.blockchaincommons.psbt")!
+}
+
+public extension URL {
+    var isPSBT: Bool {
+        (try? resourceValues(forKeys: [.contentTypeKey]).contentType?.conforms(to: .psbt)) ?? false
+    }
+}
 
 extension URL: ImageLoader {
     public var isImage: Bool {
