@@ -1,4 +1,5 @@
 import SwiftUI
+import WolfSwiftUI
 
 public struct ResultView<Success, Failure>: View where Failure: Error {
     let result: Result<Success, Failure>
@@ -31,5 +32,26 @@ public struct ResultView<Success, Failure>: View where Failure: Error {
             }
         }
         .padding()
+    }
+}
+
+public struct ResultScreen<Success, Failure>: View where Failure: Error {
+    @Binding var isPresented: Bool
+    let result: Result<Success, Failure>
+
+    public init(isPresented: Binding<Bool>, result: Result<Success, Failure>) {
+        self._isPresented = isPresented
+        self.result = result
+    }
+
+    public var body: some View {
+        NavigationView {
+            ResultView(result: result)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        CancelButton($isPresented)
+                    }
+                }
+        }
     }
 }
