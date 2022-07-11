@@ -1,11 +1,17 @@
 import SwiftUI
 
 public struct TransactionChat<Content>: View where Content: View {
-    let cannotRespond: Bool
+    let response: Response
     let content: () -> Content
     
-    public init(cannotRespond: Bool = false, @ViewBuilder content: @escaping () -> Content) {
-        self.cannotRespond = cannotRespond
+    public enum Response {
+        case composing
+        case error
+        case none
+    }
+    
+    public init(response: Response = .composing, @ViewBuilder content: @escaping () -> Content) {
+        self.response = response
         self.content = content
     }
     
@@ -17,26 +23,28 @@ public struct TransactionChat<Content>: View where Content: View {
                     .padding(5)
                     .font(.title)
             }
-            Spacer()
-            Group {
-                if cannotRespond {
-                    ChatBubble(direction: .trailing, fill: Color.red.opacity(0.4), stroke: .red, lineWidth: 3, radius: radius) {
-                        Image.error
-                            .foregroundColor(.red)
-                            .padding([.leading, .trailing], 20)
-                            .padding([.top, .bottom], 5)
-                    }
-                } else {
-                    ChatBubble(direction: .trailing, fill: Color.accentColor.opacity(0.4), stroke: .accentColor, lineWidth: 3, radius: radius) {
-                        Image.ellipsis
-                            .foregroundColor(.accentColor)
-                            .padding([.leading, .trailing], 20)
-                            .padding([.top, .bottom], 15)
+            if response != .none {
+                Spacer()
+                Group {
+                    if response == .error {
+                        ChatBubble(direction: .trailing, fill: Color.red.opacity(0.4), stroke: .red, lineWidth: 3, radius: radius) {
+                            Image.error
+                                .foregroundColor(.red)
+                                .padding([.leading, .trailing], 20)
+                                .padding([.top, .bottom], 5)
+                        }
+                    } else {
+                        ChatBubble(direction: .trailing, fill: Color.accentColor.opacity(0.4), stroke: .accentColor, lineWidth: 3, radius: radius) {
+                            Image.ellipsis
+                                .foregroundColor(.accentColor)
+                                .padding([.leading, .trailing], 20)
+                                .padding([.top, .bottom], 15)
+                        }
                     }
                 }
+                .font(.title)
+                .alignmentGuide(VerticalAlignment.center, computeValue: { _ in 0 })
             }
-            .font(.title)
-            .alignmentGuide(VerticalAlignment.center, computeValue: { _ in 0 })
         }
     }
 }
@@ -46,10 +54,10 @@ public struct TransactionChat<Content>: View where Content: View {
 struct TransactionChat_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            TransactionChat(cannotRespond: false) {
+            TransactionChat(response: .composing) {
                 Text("Hello")
             }
-            TransactionChat(cannotRespond: true) {
+            TransactionChat(response: .error) {
                 Text("Hello")
             }
         }
