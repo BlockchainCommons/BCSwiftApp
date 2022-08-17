@@ -23,12 +23,18 @@ final class ScanModel: ObservableObject {
             case "crypto-seed":
                 let seed = try Seed(ur: ur)
                 resultPublisher.send(.seed(seed))
-            case "crypto-request", "crypto-psbt":
+            case "envelope":
+                if let request = try? TransactionRequest(ur: ur) {
+                    resultPublisher.send(.request(request))
+                } else if let response = try? TransactionResponse(ur: ur) {
+                    resultPublisher.send(.response(response))
+                } else {
+                    let message = "Unrecognized ur:\(ur.type)"
+                    resultPublisher.send(.failure(GeneralError(message)))
+                }
+            case "crypto-psbt":
                 let request = try TransactionRequest(ur: ur)
                 resultPublisher.send(.request(request))
-            case "crypto-response":
-                let response = try TransactionResponse(ur: ur)
-                resultPublisher.send(.response(response))
             case "crypto-sskr":
                 if
                     let secret = try sskrDecoder.addShare(ur: ur),
@@ -37,7 +43,7 @@ final class ScanModel: ObservableObject {
                     resultPublisher.send(.seed(seed))
                 }
             default:
-                let message = "Unrecognized UR: \(ur.type)"
+                let message = "Unrecognized ur:\(ur.type)"
                 resultPublisher.send(.failure(GeneralError(message)))
             }
         } catch {

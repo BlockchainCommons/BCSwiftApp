@@ -86,7 +86,7 @@ struct URExport_Previews: PreviewProvider {
             isSensitive: true,
             ur: TransactionRequest(
                 body: .seed(
-                    SeedRequestBody(digest: seed.identityDigestSource)
+                    SeedRequestBody(seedDigest: seed.identityDigestSource)
                 )
             ).ur,
             name: seed.name,

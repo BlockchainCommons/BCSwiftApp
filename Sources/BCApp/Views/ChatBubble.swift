@@ -162,7 +162,7 @@ public extension ChatBubble where Fill == EmptyView {
         self.init(direction: direction, fill: EmptyView(), stroke: stroke, lineWidth: lineWidth, radius: radius, content: content)
     }
 
-    public init(direction: Direction, stroke: Color = .primary, lineWidth: Double = 0, radius: Double = 20, @ViewBuilder content: @escaping () -> Content) {
+    init(direction: Direction, stroke: Color = .primary, lineWidth: Double = 0, radius: Double = 20, @ViewBuilder content: @escaping () -> Content) {
         self.init(direction: direction, fill: EmptyView(), stroke: stroke, lineWidth: lineWidth, radius: .constant(radius), content: content)
     }
 }

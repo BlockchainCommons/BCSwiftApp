@@ -80,7 +80,9 @@ public struct Scan: View {
                     let uri = try await nfcReader.readURI(tag)
                     // Allow a little time for the NFC reader interface to play its sound.
                     Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
-                        self.receiveURL(uri)
+                        Task {
+                            await self.receiveURL(uri)
+                        }
                     }
 
                     nfcReader.invalidate()
