@@ -1,5 +1,4 @@
 import SwiftUI
-@_exported import BCFoundation
 
 public extension Network {
     var image: Image {
