@@ -1,7 +1,7 @@
 import UIKit
 import UIImageColors
-import WolfColor
 import simd
+import WolfBase
 
 public func getMatchedColors(for image: UIImage, quality: UIImageColorsQuality = .high) -> MatchedImageColors? {
     guard let imageColors = image.getColors(quality: quality) else { return nil }
@@ -13,8 +13,8 @@ public func getMatchedColors(for image: UIImage, quality: UIImageColorsQuality =
     )
 }
 
-public extension Color {
-    func distance(to other: Color) -> Double {
+public extension Colour {
+    func distance(to other: Colour) -> Double {
         let v1 = SIMD3<Double>(red, green, blue)
         let v2 = SIMD3<Double>(other.red, other.green, other.blue)
         let d = v2 - v1
@@ -22,7 +22,7 @@ public extension Color {
     }
 }
 
-public func closestNamedColor(to color: Color) -> NamedColor {
+public func closestNamedColor(to color: Colour) -> NamedColor {
     var bestNamedColor: NamedColor!
     var bestDistance: Double = .infinity
     NamedColor.colors.forEach { namedColor in
@@ -41,7 +41,7 @@ public struct ImageColorMatch {
 
     public init(color: UIColor) {
         self.color = color
-        namedColor = closestNamedColor(to: Color(color))
+        namedColor = closestNamedColor(to: Colour(color))
     }
 }
 
@@ -54,12 +54,12 @@ public struct MatchedImageColors {
 
 public struct NamedColor: Decodable {
     public let name: String
-    public let color: Color
+    public let color: Colour
 
     public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         let colorString = try container.decode(String.self)
-        color = try Color(string: colorString)
+        color = try Colour(string: colorString)
         name = try container.decode(String.self)
     }
 
