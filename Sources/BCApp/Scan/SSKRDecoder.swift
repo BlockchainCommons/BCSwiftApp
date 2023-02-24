@@ -191,7 +191,7 @@ public class SSKRDecoder : ObservableObject {
             return share
         }
         
-        if let share = try SSKRShare(urString: string) {
+        if let share = try? SSKRShare(urString: string) {
             return share
         }
         
