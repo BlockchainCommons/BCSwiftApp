@@ -4,7 +4,7 @@ import SwiftUI
 import os
 
 public struct Application {
-    public static let maxFragmentLen = 600
+    public static var maxFragmentLen = 200
 
     public static let bundleIdentifier = Bundle.main.bundleIdentifier!
 
