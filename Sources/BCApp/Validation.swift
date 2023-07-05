@@ -85,7 +85,7 @@ struct ValidationModifier: ViewModifier {
             return AnyView(EmptyView())
         case .invalid(let message):
             let message = message ?? "Invalid."
-            let text = Text(message)
+            let text = Text(markdown: message)
                 .foregroundColor(Color.red)
                 .font(.caption)
             return AnyView(text)

@@ -20,18 +20,26 @@ final class ScanModel: ObservableObject {
     func receive(ur: UR) {
         do {
             switch ur.type {
+            case "envelope":
+                guard let envelope = try? Envelope(ur: ur) else {
+                    let message = "Invalid envelope encoding"
+                    resultPublisher.send(.failure(GeneralError(message)))
+                    return
+                }
+                
+                if let request = try? TransactionRequest(envelope) {
+                    resultPublisher.send(.request(request))
+                } else if let response = try? TransactionResponse(envelope) {
+                    resultPublisher.send(.response(response))
+                } else if let seed = try? Seed(envelope) {
+                    resultPublisher.send(.seed(seed))
+                } else {
+                    let message = "Unrecognized envelope contents"
+                    resultPublisher.send(.failure(GeneralError(message)))
+                }
             case "crypto-seed":
                 let seed = try Seed(ur: ur)
                 resultPublisher.send(.seed(seed))
-            case "envelope":
-                if let request = try? TransactionRequest(ur: ur) {
-                    resultPublisher.send(.request(request))
-                } else if let response = try? TransactionResponse(ur: ur) {
-                    resultPublisher.send(.response(response))
-                } else {
-                    let message = "Unrecognized ur:\(ur.type)"
-                    resultPublisher.send(.failure(GeneralError(message)))
-                }
             case "crypto-psbt":
                 let request = try TransactionRequest(ur: ur)
                 resultPublisher.send(.request(request))

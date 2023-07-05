@@ -5,7 +5,7 @@ public struct UserGuideButton<Chapter: ChapterProtocol>: View {
     let openToChapter: Chapter?
     let showShortTitle: Bool
     
-    public init(openToChapter: Chapter? = nil, showShortTitle: Bool = false) {
+    public init(openToChapter: Chapter?, showShortTitle: Bool = false) {
         self.openToChapter = openToChapter
         self.showShortTitle = showShortTitle
     }

@@ -23,6 +23,7 @@ extension Image {
     public static var byteWords: Image { Image("bytewords.bar", bundle: Bundle.module) }
     public static var hex: Image { Image("hex.bar", bundle: Bundle.module) }
     public static var secure: Image { Image(systemName: "shield.lefthalf.fill") }
+    public static var envelope: Image { Image(systemName: "envelope") }
 
     // Actions
     public static var nfc: Image { Image("nfc", bundle: Bundle.module) }
