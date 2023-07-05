@@ -26,6 +26,6 @@ public extension ExportDataButton where Content == MenuLabel<Label<Text, AnyView
     }
 
     init(_ string: String, icon: Image, isSensitive: Bool, action: @escaping () -> Void) {
-        self.init(Text(string), icon: icon, isSensitive: isSensitive, action: action)
+        self.init(Text(markdown: string), icon: icon, isSensitive: isSensitive, action: action)
     }
 }

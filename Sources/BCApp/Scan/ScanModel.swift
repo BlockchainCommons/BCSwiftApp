@@ -33,6 +33,15 @@ final class ScanModel: ObservableObject {
                     resultPublisher.send(.response(response))
                 } else if let seed = try? Seed(envelope) {
                     resultPublisher.send(.seed(seed))
+                } else if let sskrShare = try? envelope.extractObject(SSKRShare.self, forPredicate: .sskrShare) {
+                    if let secret = try sskrDecoder.addShare(sskrShare) {
+                        guard let contentKey = SymmetricKey(secret) else {
+                            throw GeneralError("Invalid content key")
+                        }
+                        let decrypted = try envelope.decryptSubject(with: contentKey).unwrap()
+                        let seed = try Seed(decrypted)
+                        resultPublisher.send(.seed(seed))
+                    }
                 } else {
                     let message = "Unrecognized envelope contents"
                     resultPublisher.send(.failure(GeneralError(message)))

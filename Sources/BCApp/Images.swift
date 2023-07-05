@@ -66,11 +66,11 @@ extension Image {
     public static var success: Image { Image(systemName: "checkmark.circle.fill") }
     public static var failure: Image { Image(systemName: "xmark.octagon.fill") }
     
-    public static var reveal: Image { Image(systemName: "eye") }
-    public static var hide: Image { Image(systemName: "eye.slash") }
+    public static var revealed: Image { Image(systemName: "eye") }
+    public static var hidden: Image { Image(systemName: "eye.slash") }
     
     public static func toggleVisibility(isRevealed: Bool) -> Image {
-        isRevealed ? hide : reveal
+        isRevealed ? revealed : hidden
     }
 
     public static var locked: Image { Image(systemName: "lock.fill") }

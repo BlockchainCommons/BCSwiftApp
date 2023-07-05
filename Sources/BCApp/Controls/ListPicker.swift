@@ -2,6 +2,11 @@ import SwiftUI
 import Foundation
 import WolfBase
 
+public extension CGRect {
+    var intDescription: String {
+        "(\(Int(origin.x.rounded())), \(Int(origin.y.rounded())), \(Int(size.width.rounded())), \(Int(size.height.rounded())))"
+    }
+}
 public struct ListPicker<SegmentType>: View where SegmentType: Segment {
     @Binding var selection: SegmentType
     @Binding var segments: [SegmentType]
@@ -60,6 +65,18 @@ public struct ListPicker<SegmentType>: View where SegmentType: Segment {
                 }
             }
     }
+    
+    private func makeSelectionBox(geometry: GeometryProxy, rect: CGRect) -> some View {
+        Rectangle()
+            .fill(Color.clear)
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.formGroupBackground)
+            .frame(width: geometry.size.width + 2 * margin, height: rect.height + 2 * margin)
+            .position(x: geometry.size.width / 2, y: rect.minY + rect.height / 2)
+            )
+            .frame(width: width, height: height)
+    }
 
     public var body: some View {
         let indexedSegments: [IndexedSegment] = segments.enumerated().map { elem in
@@ -71,33 +88,24 @@ public struct ListPicker<SegmentType>: View where SegmentType: Segment {
                     let selectionIndex = selectionIndex,
                     let rect = segmentRects.rect(at: selectionIndex)
                 {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(Color.formGroupBackground)
-                        .frame(width: viewProxy.size.width, height: rect.height)
-                        .offset(x: 0, y: rect.minY)
-//                        .frame(width: viewProxy.size.width + 2 * margin, height: rect.size.height + 2 * margin)
-//                        .offset(x: -margin, y: rect.minY - margin)
+                    makeSelectionBox(geometry: viewProxy, rect: rect)
                 }
-                VStack(alignment: .leading, spacing: 0) {
+                VStack(alignment: .leading, spacing: margin + 5) {
                     ForEach(indexedSegments) { indexedSegment in
                         indexedSegment.segment.label
-                            .padding(margin)
-//                            .debugBlue()
+                            //.debugBlue()
                             .background(
                                 GeometryReader { segmentLabelGeometry in
                                     measureLabel(geometry: segmentLabelGeometry, segment: indexedSegment)
                                 }
                             )
-//                            .frame(height: height(forSegmentIndex: indexedSegment.index))
                     }
-//                    .offset(x: -margin)
                 }
                 .coordinateSpace(name: "ListPicker")
                 
                 ForEach(segmentRects.keys, id: \.self) { index in
                     makeTapBox(geometry: viewProxy, index: index)
                 }
-//                .coordinateSpace(name: "ListPicker")
             }
             .background(
                 GeometryReader { viewProxy in
@@ -105,7 +113,6 @@ public struct ListPicker<SegmentType>: View where SegmentType: Segment {
                         .preference(key: WidthKey.self, value: viewProxy.size.width)
                 }
             )
-//            .coordinateSpace(name: "ListPicker")
             .onPreferenceChange(SegmentRectsKey.self) { value in
                 segmentRects = value
                 let minTop = segmentRects.minTop
@@ -117,7 +124,6 @@ public struct ListPicker<SegmentType>: View where SegmentType: Segment {
             .onPreferenceChange(WidthKey.self) { value in
                 width = value
             }
-//            .padding([.top], margin)
         }
 //        .debugRed()
         .frame(width: width, height: height)

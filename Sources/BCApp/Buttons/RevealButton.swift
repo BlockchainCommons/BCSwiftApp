@@ -85,7 +85,7 @@ public struct RevealButton2<RevealedContent, HiddenContent>: View where Revealed
     }
     
     var activeIcon: Image {
-        isRevealed ? Image.hide : icon
+        isRevealed ? Image.hidden : icon
     }
     
     public var body: some View {
