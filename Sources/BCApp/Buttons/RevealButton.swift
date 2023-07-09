@@ -12,12 +12,13 @@ public struct RevealButton<RevealedContent, HiddenContent>: View where RevealedC
     let alignment: VerticalAlignment
     let revealed: () -> RevealedContent
     let hidden: () -> HiddenContent
-    @State var isRevealed: Bool = false
+    @Binding var isRevealed: Bool
     @State private var height: Double = .infinity
     @State private var didAppear = false
     
-    public init(alignment: VerticalAlignment = .firstTextBaseline, @ViewBuilder revealed: @escaping () -> RevealedContent, @ViewBuilder hidden: @escaping () -> HiddenContent) {
+    public init(isRevealed: Binding<Bool>, alignment: VerticalAlignment = .firstTextBaseline, @ViewBuilder revealed: @escaping () -> RevealedContent, @ViewBuilder hidden: @escaping () -> HiddenContent) {
         self.alignment = alignment
+        self._isRevealed = isRevealed
         self.revealed = revealed
         self.hidden = hidden
     }
@@ -113,20 +114,20 @@ public struct RevealButton2<RevealedContent, HiddenContent>: View where Revealed
     }
 }
 
-#if DEBUG
-
-import WolfLorem
-
-struct RevealButton_Previews: PreviewProvider {
-    static var previews: some View {
-        RevealButton {
-            Text(Lorem.sentence())
-        } hidden: {
-            Text("Hidden")
-        }
-        .formSectionStyle()
-        .darkMode()
-    }
-}
-
-#endif
+//#if DEBUG
+//
+//import WolfLorem
+//
+//struct RevealButton_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RevealButton {
+//            Text(Lorem.sentence())
+//        } hidden: {
+//            Text("Hidden")
+//        }
+//        .formSectionStyle()
+//        .darkMode()
+//    }
+//}
+//
+//#endif

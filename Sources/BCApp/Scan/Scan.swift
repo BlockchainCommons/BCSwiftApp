@@ -49,7 +49,7 @@ public struct Scan: View {
         self.allowPSBT = allowPSBT
         self.onScanResult = onScanResult
         let sskrDecoder = SSKRDecoder {
-            Feedback.progress()
+            Feedback.intermediate()
         }
         let codesPublisher = URCodesPublisher()
         self.codesPublisher = codesPublisher
@@ -449,7 +449,8 @@ public struct Scan: View {
                 Feedback.progress()
                 estimatedPercentComplete = p.estimatedPercentComplete
             case .reject:
-                Feedback.error()
+                scanState.restart()
+//                Feedback.error()
             case .failure(let error):
                 failure(error)
             }

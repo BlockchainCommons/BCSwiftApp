@@ -21,6 +21,10 @@ extension Feedback {
         click.play()
     }
 
+    public static func intermediate() {
+        beep3.play()
+    }
+
     public static func success() {
         beep4.play()
     }

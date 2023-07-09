@@ -16,7 +16,6 @@ final class ScanModel: ObservableObject {
             resultPublisher.send(.failure(GeneralError("Unrecognized format.")))
         }
     }
-    
     func receive(ur: UR) {
         do {
             switch ur.type {
