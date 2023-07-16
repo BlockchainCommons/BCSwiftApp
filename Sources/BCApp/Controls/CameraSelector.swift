@@ -46,14 +46,11 @@ public struct CameraSelector<Camera>: View where Camera: CameraProtocol {
             switch selectedCamera?.position {
             case .front?:
                 icon(image: Image.frontCamera)
-                    .eraseToAnyView()
             case .back?:
                 icon(image: Image.backCamera)
-                    .eraseToAnyView()
             default:
                 icon()
                     .foregroundColor(.secondary)
-                    .eraseToAnyView()
             }
         }
     }

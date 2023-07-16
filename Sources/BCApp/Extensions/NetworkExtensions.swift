@@ -9,11 +9,11 @@ public extension Network {
             return .testnet
         }
     }
-    
-    var icon: AnyView {
+
+    @ViewBuilder
+    var icon: some View {
         image
             .accessibility(label: Text(self.name))
-            .eraseToAnyView()
     }
     
     var name: String {
@@ -37,7 +37,7 @@ public extension Network {
     }
 
     var subtype: ModelSubtype {
-        ModelSubtype(id: id, icon: icon)
+        ModelSubtype(id: id, icon: icon.eraseToAnyView())
     }
 }
 

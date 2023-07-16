@@ -105,25 +105,16 @@ public struct Scan: View {
             self.videoSession.setCaptureDevice(device)
         }
         .padding()
-        .sheet(item: $presentedSheet) { item -> AnyView in
+        .sheet(item: $presentedSheet) { item in
             let isSheetPresented = Binding<Bool>(
                 get: { presentedSheet != nil },
                 set: { if !$0 { presentedSheet = nil } }
             )
             switch item {
             case .photos:
-                var configuration = PHPickerConfiguration()
-                configuration.filter = .images
-                configuration.selectionLimit = 0
-                configuration.preferredAssetRepresentationMode = .compatible
-                return PhotoPicker(isPresented: isSheetPresented, configuration: configuration, completion: processLoadedImages)
-                    .eraseToAnyView()
+                PhotoPicker(isPresented: isSheetPresented, configuration: photoPickerConfiguration, completion: processLoadedImages)
             case .files:
-                var configuration = DocumentPickerConfiguration()
-                configuration.documentTypes = [.item]
-                configuration.asCopy = true
-                configuration.allowsMultipleSelection = true
-                return DocumentPicker(isPresented: isSheetPresented, configuration: configuration) { urls in
+                DocumentPicker(isPresented: isSheetPresented, configuration: documentPickerConfiguration) { urls in
                     var imageURLs: [URL] = []
                     var psbtURLs: [URL] = []
                     var otherURLs: [URL] = []
@@ -146,7 +137,6 @@ public struct Scan: View {
                         processOtherFiles(otherURLs)
                     }
                 }
-                .eraseToAnyView()
             }
         }
         .onAppear {
@@ -166,6 +156,22 @@ public struct Scan: View {
             }
         }
         .font(.body)
+    }
+    
+    private var photoPickerConfiguration: PHPickerConfiguration {
+        var configuration = PHPickerConfiguration()
+        configuration.filter = .images
+        configuration.selectionLimit = 0
+        configuration.preferredAssetRepresentationMode = .compatible
+        return configuration
+    }
+    
+    private var documentPickerConfiguration: DocumentPickerConfiguration {
+        var configuration = DocumentPickerConfiguration()
+        configuration.documentTypes = [.item]
+        configuration.asCopy = true
+        configuration.allowsMultipleSelection = true
+        return configuration
     }
     
     @MainActor

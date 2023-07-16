@@ -31,12 +31,10 @@ struct ConditionalLongPressAction: ViewModifier {
 
     func body(content: Content) -> some View {
         if actionEnabled {
-            return content
+            content
                 .longPressAction(action: action)
-                .eraseToAnyView()
         } else {
-            return content
-                .eraseToAnyView()
+            content
         }
     }
 }

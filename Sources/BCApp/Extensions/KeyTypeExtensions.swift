@@ -2,20 +2,19 @@ import SwiftUI
 import BCFoundation
 
 public extension KeyType {
-    var icon: AnyView {
+    @ViewBuilder
+    var icon: some View {
         switch self {
         case .private:
-            return Image.privateKey
+            Image.privateKey
                 .icon()
                 .foregroundColor(.black)
                 .encircle(color: .lightRedBackground)
-                .eraseToAnyView()
         case .public:
-            return Image.publicKey
+            Image.publicKey
                 .icon()
                 .foregroundColor(.white)
                 .encircle(color: Color.darkGreenBackground)
-                .eraseToAnyView()
         }
     }
     

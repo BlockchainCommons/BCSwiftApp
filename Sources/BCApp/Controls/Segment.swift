@@ -4,7 +4,7 @@ public protocol Segment: Identifiable, Equatable {
     var label: AnyView { get }
 }
 
-public func makeSegmentLabel(title: String? = nil, icon: AnyView? = nil) -> AnyView {
+public func makeSegmentLabel<Icon>(title: String? = nil, icon: Icon? = nil) -> AnyView where Icon: View {
     HStack {
         icon
         if let title = title {

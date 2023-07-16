@@ -79,16 +79,16 @@ struct ValidationModifier: ViewModifier {
         }
     }
 
+    @ViewBuilder
     public var validationMessage: some View {
         switch latestValidation {
         case .valid:
-            return AnyView(EmptyView())
+            EmptyView()
         case .invalid(let message):
             let message = message ?? "Invalid."
-            let text = Text(markdown: message)
+            Text(markdown: message)
                 .foregroundColor(Color.red)
                 .font(.caption)
-            return AnyView(text)
         }
     }
 }

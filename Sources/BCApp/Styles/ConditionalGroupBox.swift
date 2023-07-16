@@ -11,11 +11,12 @@ public struct ConditionalGroupBox<Label, Content>: View where Label : View, Cont
         self.content = content
     }
 
+    @ViewBuilder
     public var body: some View {
         if isVisible {
-            return GroupBox(label: label(), content: content).eraseToAnyView()
+            GroupBox(label: label(), content: content)
         } else {
-            return content().eraseToAnyView()
+            content()
         }
     }
 }

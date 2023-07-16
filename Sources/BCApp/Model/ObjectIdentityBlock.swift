@@ -101,9 +101,10 @@ public struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
         .background(ActivityView(params: $activityParams))
     }
     
+    @ViewBuilder
     var icon: some View {
         if let model = model {
-            return HStack(spacing: hStackSpacing) {
+            HStack(spacing: hStackSpacing) {
                 ModelObjectTypeIcon(type: model.modelObjectType)
                     .frame(width: iconSize, height: iconSize)
                     .accessibility(label: Text(model.modelObjectType.name))
@@ -111,13 +112,11 @@ public struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
                     $0.icon
                 }
             }
-            .eraseToAnyView()
         } else {
-            return Image.missing
+            Image.missing
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: iconSize, height: iconSize)
-                .eraseToAnyView()
         }
     }
     
@@ -143,14 +142,10 @@ public struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
         }
     }
 
+    @ViewBuilder
     var instanceDetail: some View {
-        var fields = model!.exportFields
-        fields[.placeholder] = "Detail of \(name)"
-        fields[.fragment] = "Detail"
-        fields[.format] = nil
-
         if let model = model, let instanceDetail = model.instanceDetail {
-            return Text(instanceDetail)
+            Text(instanceDetail)
                 .font(.caption)
                 .lineLimit(1)
                 .minimumScaleFactor(0.3)
@@ -162,10 +157,17 @@ public struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
                         fields: fields
                     )
                 }
-                .eraseToAnyView()
         } else {
-            return EmptyView().eraseToAnyView()
+            EmptyView()
         }
+    }
+    
+    private var fields: ExportFields {
+        var fields = model!.exportFields
+        fields[.placeholder] = "Detail of \(name)"
+        fields[.fragment] = "Detail"
+        fields[.format] = nil
+        return fields
     }
     
     var identifier: some View {
