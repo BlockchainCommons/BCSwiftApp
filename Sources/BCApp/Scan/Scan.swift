@@ -375,7 +375,7 @@ public struct Scan: View {
         VStack(alignment: .leading, spacing: 10) {
             VStack(alignment: .leading) {
                 HStack(alignment: .center) {
-                    Text(prompt)
+                    Text(markdown: prompt)
                         .lineLimit(2)
                         .minimumScaleFactor(0.5)
                     Spacer()
@@ -418,7 +418,7 @@ public struct Scan: View {
                     .frame(maxWidth: .infinity)
 
                     if let caption {
-                        Text(caption)
+                        Text(markdown: caption)
                             .font(.caption)
                     }
                 }
