@@ -7,6 +7,7 @@ public protocol ObjectIdentifiable: Fingerprintable, Equatable {
     var name: String { get set }
     var subtypes: [ModelSubtype] { get }
     var instanceDetail: String? { get }
+    var instanceDetailFingerprintable: Fingerprintable? { get }
     var visualHashType: VisualHashType { get }
     var digestIdentifier: String { get }
     var typeString: String { get }
@@ -20,6 +21,10 @@ public extension ObjectIdentifiable {
     }
     
     var instanceDetail: String? {
+        nil
+    }
+    
+    var instanceDetailFingerprintable: Fingerprintable? {
         nil
     }
     

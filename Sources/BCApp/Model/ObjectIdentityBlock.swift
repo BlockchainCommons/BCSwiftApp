@@ -19,6 +19,8 @@ public struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
     
     @StateObject private var lifeHashState: LifeHashState
     @StateObject private var lifeHashNameGenerator: LifeHashNameGenerator
+    
+    @StateObject private var detailLifeHashState: LifeHashState
 
     @State private var chosenSize: CGSize?
     
@@ -51,6 +53,9 @@ public struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
         let lifeHashState = LifeHashState(version: .version2, generateAsync: generateVisualHashAsync, moduleSize: generateVisualHashAsync ? 1 : 8)
         _lifeHashState = .init(wrappedValue: lifeHashState)
         _lifeHashNameGenerator = .init(wrappedValue: LifeHashNameGenerator(lifeHashState: provideSuggestedName ? lifeHashState : nil))
+
+        let detailLifeHashState = LifeHashState(version: .version2, generateAsync: generateVisualHashAsync, moduleSize: generateVisualHashAsync ? 1 : 8)
+        _detailLifeHashState = .init(wrappedValue: detailLifeHashState)
     }
 
     public var body: some View {
@@ -90,6 +95,7 @@ public struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
         }
         .onAppear {
             lifeHashState.fingerprint = model?.fingerprint
+            detailLifeHashState.fingerprint = model?.instanceDetailFingerprintable?.fingerprint
         }
         .onReceive(lifeHashNameGenerator.$suggestedName) { suggestedName in
             guard let suggestedName = suggestedName else { return }
@@ -97,6 +103,7 @@ public struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
         }
         .onChange(of: model) { newModel in
             lifeHashState.fingerprint = newModel?.fingerprint
+            detailLifeHashState.fingerprint = newModel?.instanceDetailFingerprintable?.fingerprint
         }
         .background(ActivityView(params: $activityParams))
     }
@@ -144,21 +151,31 @@ public struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
 
     @ViewBuilder
     var instanceDetail: some View {
-        if let model = model, let instanceDetail = model.instanceDetail {
-            Text(instanceDetail)
-                .font(.caption)
-                .lineLimit(1)
-                .minimumScaleFactor(0.3)
-                .fixedVertical()
-                .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                    activityParams = ActivityParams(
-                        instanceDetail,
-                        name: name,
-                        fields: fields
-                    )
+        HStack {
+            if model?.instanceDetailFingerprintable != nil {
+                LifeHashView(state: detailLifeHashState) {
+                    Rectangle()
+                        .fill(Color.gray)
                 }
-        } else {
-            EmptyView()
+                .frame(width: 24, height: 24)
+            }
+
+            if let model = model, let instanceDetail = model.instanceDetail {
+                Text(instanceDetail)
+                    .font(.caption)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.3)
+                    .fixedVertical()
+                    .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
+                        activityParams = ActivityParams(
+                            instanceDetail,
+                            name: name,
+                            fields: fields
+                        )
+                    }
+            } else {
+                EmptyView()
+            }
         }
     }
     
