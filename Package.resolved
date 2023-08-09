@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/bc-lifehash",
       "state" : {
-        "revision" : "518f4398982a327fd14d745d192e28b23f44463f",
-        "version" : "0.4.0"
+        "revision" : "9f1d125749b763b932619e682588bb7f26933d29",
+        "version" : "0.4.1"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftCrypto.git",
       "state" : {
-        "revision" : "3236af46adba5a48cbc100c4a181d38b37f2c822",
-        "version" : "0.5.0"
+        "revision" : "e4af871818343284575ecfec5248c427fe9ba0a1",
+        "version" : "0.7.1"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftDCBOR",
       "state" : {
-        "revision" : "1ecccdc891f291402843420cb965923befee7cb4",
-        "version" : "0.9.0"
+        "revision" : "a6230ecc2e22b0041816bd2f12a114281648da36",
+        "version" : "0.9.2"
       }
     },
     {
@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftEnvelope.git",
       "state" : {
-        "revision" : "741f56f4b66ce521fb5094b707cde12a9bb857c6",
-        "version" : "0.10.1"
+        "revision" : "149508126df05e69b9a5c638df51868143103816",
+        "version" : "0.15.0"
       }
     },
     {
@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftFoundation",
       "state" : {
-        "revision" : "8724550d1c629493ef329c6a0a849f8fbad0a580",
-        "version" : "8.1.1"
+        "revision" : "cd148bb2c9695a7ac1acbba7e60939ba5835c319",
+        "version" : "8.3.0"
       }
     },
     {
@@ -68,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftNFC.git",
       "state" : {
-        "revision" : "c2eabfe090176b842ccb63108abfef14395b8213",
-        "version" : "2.1.0"
+        "revision" : "972dcce2206066a77eeb3e2cc736de6ce9f8a95d",
+        "version" : "2.1.1"
       }
     },
     {
@@ -77,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftSecureComponents.git",
       "state" : {
-        "revision" : "fbfe46944bec36427e3852eee4d1d72e726b5c45",
-        "version" : "4.1.1"
+        "revision" : "4395f46983ef43adb3905ae45b6fdb69af5c01cd",
+        "version" : "4.4.0"
       }
     },
     {
@@ -86,8 +86,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/combine-schedulers",
       "state" : {
-        "revision" : "0625932976b3ae23949f6b816d13bd97f3b40b7c",
-        "version" : "0.10.0"
+        "revision" : "ec62f32d21584214a4b27c8cee2b2ad70ab2c38a",
+        "version" : "0.11.0"
       }
     },
     {
@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/krzyzanowskim/CryptoSwift.git",
       "state" : {
-        "revision" : "eee9ad754926c40a0f7e73f152357d37b119b7fa",
-        "version" : "1.7.1"
+        "revision" : "32f641cf24fc7abc1c591a2025e9f2f572648b0f",
+        "version" : "1.7.2"
       }
     },
     {
@@ -140,8 +140,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/LifeHash.git",
       "state" : {
-        "revision" : "37578f87440d1efd37f0e4cf11af3463303b6b46",
-        "version" : "6.3.1"
+        "revision" : "fb842d1378b960be6750267e98ae6ce8f287054d",
+        "version" : "6.3.2"
       }
     },
     {
@@ -187,6 +187,15 @@
       "state" : {
         "revision" : "53a8adc54374f620002a3b6401d39e0feb3c57ae",
         "version" : "1.1.0"
+      }
+    },
+    {
+      "identity" : "swift-concurrency-extras",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-concurrency-extras",
+      "state" : {
+        "revision" : "479750bd98fac2e813fffcf2af0728b5b0085795",
+        "version" : "0.1.1"
       }
     },
     {
@@ -239,8 +248,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/URKit.git",
       "state" : {
-        "revision" : "938eebc6b65ec4c7a8a2b6c5699140e3cd436c43",
-        "version" : "11.2.1"
+        "revision" : "a395fef328f83f184d0fc28fc2413d70ffe54c50",
+        "version" : "11.3.0"
       }
     },
     {
@@ -248,8 +257,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/URUI.git",
       "state" : {
-        "revision" : "c6ecf217d17c21712a786a4b9318a76571442d96",
-        "version" : "8.1.0"
+        "revision" : "ff26f9e771e541a9b3ab3a48fd538491a0bf5234",
+        "version" : "8.1.1"
       }
     },
     {
@@ -257,8 +266,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/WolfMcNally/WolfBase",
       "state" : {
-        "revision" : "21feeff132b57bbdf0eb57fae73a5e36d485b32d",
-        "version" : "5.3.0"
+        "revision" : "d7219c703316956c42a7f47f926a442d082f043f",
+        "version" : "5.3.1"
       }
     },
     {
@@ -275,8 +284,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wolfmcnally/WolfSwiftUI.git",
       "state" : {
-        "revision" : "ffbc163dd5ce6ea82be9e1890ee59e1dee2ce80d",
-        "version" : "2.2.0"
+        "revision" : "59ac45ba4d031b17ff990a3d9c827561953ab033",
+        "version" : "2.3.0"
       }
     },
     {
@@ -284,8 +293,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
       "state" : {
-        "revision" : "4af50b38daf0037cfbab15514a241224c3f62f98",
-        "version" : "0.8.5"
+        "revision" : "50843cbb8551db836adec2290bb4bc6bac5c1865",
+        "version" : "0.9.0"
       }
     }
   ],
