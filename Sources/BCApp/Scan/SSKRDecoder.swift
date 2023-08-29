@@ -195,6 +195,13 @@ public class SSKRDecoder : ObservableObject {
             return share
         }
         
+        if
+            let envelope = try? Envelope(urString: string),
+            let share = try? envelope.extractObject(SSKRShare.self, forPredicate: .sskrShare)
+        {
+            return share
+        }
+        
         return nil
     }
 }
