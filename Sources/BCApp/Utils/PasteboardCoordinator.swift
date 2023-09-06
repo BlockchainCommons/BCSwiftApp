@@ -34,7 +34,7 @@ final class PasteboardCoordinator: ObservableObject {
         }
         let items: [[String: Any]] = [[type.identifier: value]]
         UIPasteboard.general.setItems(items, options: options)
-        Feedback.copy.play()
+        Haptic.copy()
 
         withAnimation(.easeOut(duration: 0.2)) {
             self.isConfirmationPresented = true

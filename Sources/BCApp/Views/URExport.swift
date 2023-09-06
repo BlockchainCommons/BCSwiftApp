@@ -29,7 +29,7 @@ public struct URExport: View {
     public var body: some View {
         var flowItems: [AnyView] = []
         flowItems.append(contentsOf: [
-            ExportDataButton("Share as ur:\(ur.type)", icon: Image.ur, isSensitive: isSensitive) {
+            ExportDataButton("Share as `ur:\(ur.type)`", icon: Image.ur, isSensitive: isSensitive) {
                 activityParams = ActivityParams(
                     ur,
                     name: name,

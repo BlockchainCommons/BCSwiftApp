@@ -12,7 +12,7 @@ struct LongPressAction: ViewModifier {
                     self.isPressing = isPressing
                 }
             }, perform: {
-                Feedback.copy.play()
+                Haptic.copy()
                 action()
             })
             .scaleEffect(isPressing ? 1.1 : 1.0)

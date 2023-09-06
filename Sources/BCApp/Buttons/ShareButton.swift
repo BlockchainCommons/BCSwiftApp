@@ -26,6 +26,6 @@ public extension ShareButton where Content == MenuLabel<Label<Text, AnyView>> {
     }
 
     init(_ string: String, icon: Image, isSensitive: Bool, params: @autoclosure @escaping () -> ActivityParams) {
-        self.init(Text(string), icon: icon, isSensitive: isSensitive, params: params())
+        self.init(Text(markdown: string), icon: icon, isSensitive: isSensitive, params: params())
     }
 }

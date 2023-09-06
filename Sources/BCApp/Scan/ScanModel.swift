@@ -26,11 +26,11 @@ final class ScanModel: ObservableObject {
                     return
                 }
                 
-                if let request = try? TransactionRequest(envelope) {
+                if let request = try? TransactionRequest(envelope: envelope) {
                     resultPublisher.send(.request(request))
-                } else if let response = try? TransactionResponse(envelope) {
+                } else if let response = try? TransactionResponse(envelope: envelope) {
                     resultPublisher.send(.response(response))
-                } else if let seed = try? Seed(envelope) {
+                } else if let seed = try? Seed(envelope: envelope) {
                     resultPublisher.send(.seed(seed))
                 } else if let sskrShare = try? envelope.extractObject(SSKRShare.self, forPredicate: .sskrShare) {
                     if let secret = try sskrDecoder.addShare(sskrShare) {
@@ -38,7 +38,7 @@ final class ScanModel: ObservableObject {
                             throw GeneralError("Invalid content key")
                         }
                         let decrypted = try envelope.decryptSubject(with: contentKey).unwrap()
-                        let seed = try Seed(decrypted)
+                        let seed = try Seed(envelope: decrypted)
                         resultPublisher.send(.seed(seed))
                     }
                 } else {
