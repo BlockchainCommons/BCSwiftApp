@@ -78,16 +78,16 @@ public struct URExport: View {
 #if DEBUG
 
 struct URExport_Previews: PreviewProvider {
-    static let seed = Seed()
+    static let seedV1 = Seed()
     
     static var previews: some View {
         try! URExport(
             isPresented: .constant(true),
             isSensitive: true,
             ur: TransactionRequest(
-                body: SeedRequestBody(seedDigest: seed.identityDigestSource)
+                body: SeedRequestBody(seedDigest: seedV1.identityDigestSource)
             ).ur,
-            name: seed.name,
+            name: seedV1.name,
             fields: [:]
         )
             .darkMode()
