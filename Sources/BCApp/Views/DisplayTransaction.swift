@@ -87,7 +87,7 @@ struct DisplayRequest_Previews: PreviewProvider {
         DisplayTransaction(
             isPresented: .constant(true), isSensitive: false,
             ur: TransactionRequest(
-                body: OutputDescriptorRequestBody(name: Lorem.title(), useInfoV1: .init(), challenge: SecureRandomNumberGenerator.shared.data(count: 16)), note: Lorem.sentence()).ur,
+                body: OutputDescriptorRequestBody(name: Lorem.title(), useInfo: .init(), challenge: SecureRandomNumberGenerator.shared.data(count: 16)), note: Lorem.sentence()).ur,
             title: "Descriptor Request",
             caption: Lorem.sentence()
         ) {

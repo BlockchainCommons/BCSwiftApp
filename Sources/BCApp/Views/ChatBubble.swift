@@ -9,7 +9,7 @@ public struct ChatBubble<Content, Fill>: View where Content: View, Fill: View {
     let content: () -> Content
     @Environment(\.layoutDirection) var layoutDirection
     
-    public enum Direction {
+    public enum Direction: Sendable {
         case leading
         case trailing
     }
