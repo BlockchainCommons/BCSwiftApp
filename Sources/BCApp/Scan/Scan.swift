@@ -192,7 +192,7 @@ public struct Scan: View {
             guard let psbt = PSBT(data) else {
                 throw GeneralError("Invalid PSBT format.")
             }
-            let request = TransactionRequest(body: PSBTSignatureRequestBody(psbt: psbt, isRawPSBT: true))
+            let request = TransactionRequest(body: PSBTSignatureRequestBody(psbt: psbt, psbtRequestStyle: .base64))
             model.receive(ur: request.ur)
         } catch {
             failure(error)
@@ -265,7 +265,7 @@ public struct Scan: View {
             let decodedBase64 = Data(base64: line),
             let psbt = PSBT(decodedBase64)
         {
-            return TransactionRequest(body: PSBTSignatureRequestBody(psbt: psbt, isRawPSBT: true)).ur
+            return TransactionRequest(body: PSBTSignatureRequestBody(psbt: psbt, psbtRequestStyle: .base64)).ur
         } else {
             do {
                 return try URDecoder.decode(line)
@@ -477,7 +477,7 @@ public struct Scan: View {
                         guard let psbt = PSBT(data) else {
                             throw GeneralError("Invalid PSBT format.")
                         }
-                        let request = TransactionRequest(body: PSBTSignatureRequestBody(psbt: psbt))
+                        let request = TransactionRequest(body: PSBTSignatureRequestBody(psbt: psbt, psbtRequestStyle: .base64))
                         model.receive(ur: request.ur)
                     } else {
                         try processImportString(string)
