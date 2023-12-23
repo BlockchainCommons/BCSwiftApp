@@ -45,13 +45,13 @@ final class ScanModel: ObservableObject {
                     let message = "Unrecognized envelope contents"
                     resultPublisher.send(.failure(GeneralError(message)))
                 }
-            case "crypto-seed":
+            case "seed", "crypto-seed":
                 let seed = try Seed(ur: ur)
                 resultPublisher.send(.seed(seed))
-            case "crypto-psbt":
+            case "psbt", "crypto-psbt":
                 let request = try TransactionRequest(ur: ur)
                 resultPublisher.send(.request(request))
-            case "crypto-sskr":
+            case "sskr", "crypto-sskr":
                 if
                     let secret = try sskrDecoder.addShare(ur: ur),
                     let seed = Seed(data: secret)
