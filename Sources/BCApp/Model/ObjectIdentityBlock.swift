@@ -41,7 +41,7 @@ public struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
     
     private var hStackSpacing: CGFloat? {
         guard let actualHeight = actualHeight else { return nil }
-        return actualHeight * 0.02
+        return actualHeight * 0.04
     }
 
     public init(model: Binding<T?>, provideSuggestedName: Bool = false, allowLongPressCopy: Bool = true, generateVisualHashAsync: Bool = true, visualHashWeight: CGFloat = 0.3, suppressName: Bool = false) {
@@ -67,6 +67,9 @@ public struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
                 default:
                     lifeHashView
                 }
+                
+                Spacer()
+                    .frame(width: 10)
                 
                 VStack(alignment: .leading, spacing: 5) {
                     HStack {

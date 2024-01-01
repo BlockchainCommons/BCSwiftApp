@@ -9,6 +9,8 @@ public extension Asset {
                 Symbol.bitcoin
             case .eth:
                 Symbol.ethereum
+            case .xtz:
+                Symbol.tezos
             }
         }
     }

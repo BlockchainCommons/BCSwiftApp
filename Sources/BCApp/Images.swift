@@ -117,6 +117,7 @@ extension Image {
     // Assets
     public static var bitcoin: Image { Image("asset.btc", bundle: Bundle.module) }
     public static var ethereum: Image { Image("asset.eth", bundle: Bundle.module) }
+    public static var tezos: Image { Image("asset.xtz", bundle: Bundle.module) }
     public static var bitcoinCash: Image { Image("asset.bch", bundle: Bundle.module) }
     public static var ethereumClassic: Image { Image("asset.etc", bundle: Bundle.module) }
     public static var litecoin: Image { Image("asset.ltc", bundle: Bundle.module) }

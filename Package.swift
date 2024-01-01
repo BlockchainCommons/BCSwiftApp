@@ -15,7 +15,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/WolfMcNally/WolfBase", from: "6.0.0"),
-        .package(url: "https://github.com/BlockchainCommons/BCSwiftFoundation", from: "10.0.0"),
+        .package(url: "https://github.com/BlockchainCommons/BCSwiftFoundation", from: "10.1.0"),
         .package(url: "https://github.com/BlockchainCommons/LifeHash.git", from: "7.0.0"),
         .package(url: "https://github.com/wolfmcnally/WolfSwiftUI.git", from: "3.0.0"),
         .package(url: "https://github.com/wolfmcnally/WolfLorem.git", from: "3.0.0"),

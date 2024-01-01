@@ -44,6 +44,10 @@ public struct Symbol: View {
         Symbol(icon: .ethereum, renderingMode: .hierarchical, color: .green)
     }
     
+    public static var tezos: Symbol {
+        Symbol(icon: .tezos, renderingMode: .hierarchical, color: .green)
+    }
+
     public static var signature: Symbol {
         Symbol(icon: .signature, renderingMode: .hierarchical, color: .teal)
     }
