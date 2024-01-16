@@ -15,11 +15,11 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/WolfMcNally/WolfBase", from: "6.0.0"),
-        .package(url: "https://github.com/BlockchainCommons/BCSwiftFoundation", from: "10.1.0"),
+        .package(url: "https://github.com/BlockchainCommons/BCSwiftFoundation", from: "11.0.0"),
         .package(url: "https://github.com/BlockchainCommons/LifeHash.git", from: "7.0.0"),
         .package(url: "https://github.com/wolfmcnally/WolfSwiftUI.git", from: "3.0.0"),
         .package(url: "https://github.com/wolfmcnally/WolfLorem.git", from: "3.0.0"),
-        .package(url: "https://github.com/BlockchainCommons/URUI.git", from: "9.0.0"),
+        .package(url: "https://github.com/BlockchainCommons/URUI.git", from: "10.0.0"),
         .package(url: "https://github.com/BlockchainCommons/BCSwiftNFC.git", from: "3.0.0"),
         .package(url: "https://github.com/gonzalezreal/MarkdownUI.git", from: "1.1.0"),
         .package(url: "https://github.com/wolfmcnally/UIImageColors.git", from: "3.0.0"),
