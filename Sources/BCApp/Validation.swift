@@ -66,15 +66,30 @@ extension Publisher where Output : Collection {
 
 struct ValidationModifier: ViewModifier {
     @State var latestValidation: Validation = .valid
+    @State var latestGuidance: AttributedString? = nil
     public let validationPublisher: ValidationPublisher
+    public let guidancePublisher: PassthroughSubject<AttributedString?, Never>
+    
+    init(validationPublisher: ValidationPublisher, guidancePublisher: PassthroughSubject<AttributedString?, Never>?) {
+        self.validationPublisher = validationPublisher
+        self.guidancePublisher = guidancePublisher ?? PassthroughSubject<AttributedString?, Never>()
+    }
 
     public func body(content: Content) -> some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 5) {
             content
+            guidanceView
             validationMessage
         }.onReceive(validationPublisher) { validation in
             withAnimation {
                 self.latestValidation = validation
+            }
+        }.onReceive(guidancePublisher) { guidanceString in
+            print(guidanceString†)
+            if guidanceString != self.latestGuidance {
+                withAnimation {
+                    self.latestGuidance = guidanceString
+                }
             }
         }
     }
@@ -91,10 +106,17 @@ struct ValidationModifier: ViewModifier {
                 .font(.caption)
         }
     }
+    
+    @ViewBuilder
+    var guidanceView: some View {
+        if let latestGuidance {
+            Text(latestGuidance)
+        }
+    }
 }
 
 extension View {
-    public func validation(_ validationPublisher: ValidationPublisher) -> some View {
-        modifier(ValidationModifier(validationPublisher: validationPublisher))
+    public func validation(_ validationPublisher: ValidationPublisher, guidancePublisher: PassthroughSubject<AttributedString?, Never>? = nil) -> some View {
+        modifier(ValidationModifier(validationPublisher: validationPublisher, guidancePublisher: guidancePublisher))
     }
 }
