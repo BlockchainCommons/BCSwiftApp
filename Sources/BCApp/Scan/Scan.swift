@@ -41,11 +41,11 @@ public struct Scan: View {
         var id: Int { rawValue }
     }
 
-    public init(isPresented: Binding<Bool>, prompt: String, caption: String? = nil, initalURL: URL? = nil, allowPSBT: Bool = false, onScanResult: @escaping (ScanResult) -> Void) {
+    public init(isPresented: Binding<Bool>, prompt: String, caption: String? = nil, initialURL: URL? = nil, allowPSBT: Bool = false, onScanResult: @escaping (ScanResult) -> Void) {
         self._isPresented = isPresented
         self.prompt = prompt
         self.caption = caption
-        self.initialURL = initalURL
+        self.initialURL = initialURL
         self.allowPSBT = allowPSBT
         self.onScanResult = onScanResult
         let sskrDecoder = SSKRDecoder {
@@ -141,7 +141,7 @@ public struct Scan: View {
         }
         .onAppear {
             if let initialURL = initialURL {
-                receiveURL(initialURL)
+                codesPublisher.send([initialURL.absoluteString])
             }
         }
         .onDisappear {
@@ -152,7 +152,7 @@ public struct Scan: View {
         .onNavigationEvent { event in
             switch event {
             case .url(let url):
-                receiveURL(url)
+                codesPublisher.send([url.absoluteString])
             }
         }
         .font(.body)
