@@ -18,8 +18,8 @@ public struct LockRevealButton<RevealedContent, HiddenContent>: View where Revea
 
     public var body: some View {
         framedContent
-        .onChange(of: isRevealed) {
-            if !$0 {
+        .onChange(of: isRevealed) { _, newValue in
+            if !newValue {
                 authentication.isUnlocked = false
             }
         }

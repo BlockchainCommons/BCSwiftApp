@@ -13,9 +13,9 @@ struct TouchEventModifier: ViewModifier {
 
         return content
             .gesture(drag)
-            .onChange(of: isPressed, perform: { isPressed in
+            .onChange(of: isPressed) { _, isPressed in
                 self.didChangedPressed(isPressed)
-            })
+            }
     }
 }
 

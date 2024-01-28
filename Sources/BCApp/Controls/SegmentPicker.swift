@@ -67,7 +67,7 @@ public struct SegmentPicker<SegmentType>: View where SegmentType: Segment {
                 segmentWidth = value
             }
         }
-        .onChange(of: segments) { _ in
+        .onChange(of: segments) {
             selection = segments.first!
         }
         .frame(maxWidth: .infinity)

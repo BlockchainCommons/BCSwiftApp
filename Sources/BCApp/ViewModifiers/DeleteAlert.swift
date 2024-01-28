@@ -27,7 +27,7 @@ struct DeleteAlert: ViewModifier {
             } message: {
                 Text(markdown: message)
             }
-            .onChange(of: isPresented) { newValue in
+            .onChange(of: isPresented) { _, newValue in
                 if newValue {
                     Haptic.warning()
                 }

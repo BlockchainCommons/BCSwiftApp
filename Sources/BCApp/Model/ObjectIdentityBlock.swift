@@ -104,7 +104,7 @@ public struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
             guard let suggestedName = suggestedName else { return }
             model?.name = suggestedName
         }
-        .onChange(of: model) { newModel in
+        .onChange(of: model) { _, newModel in
             lifeHashState.fingerprint = newModel?.fingerprint
             detailLifeHashState.fingerprint = newModel?.instanceDetailFingerprintable?.fingerprint
         }

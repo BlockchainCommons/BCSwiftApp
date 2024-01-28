@@ -25,7 +25,7 @@ public struct Scan: View {
     @StateObject private var scanState: URScanState
     @StateObject private var sskrDecoder: SSKRDecoder
     @StateObject private var model: ScanModel
-    @StateObject private var nfcReader = NFCReader()
+    static private let nfcReader = NFCReader()
 
     @State private var presentedSheet: Sheet?
     @State private var scanResult: ScanResult? = nil
@@ -74,10 +74,10 @@ public struct Scan: View {
                 resultView
             }
         }
-        .onReceive(nfcReader.tagPublisher) { tag in
+        .onReceive(Self.nfcReader.tagPublisher) { tag in
             Task {
                 do {
-                    let uri = try await nfcReader.readURI(tag)
+                    let uri = try await Self.nfcReader.readURI(tag)
                     // Allow a little time for the NFC reader interface to play its sound.
                     Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
                         Task {
@@ -85,10 +85,10 @@ public struct Scan: View {
                         }
                     }
 
-                    nfcReader.invalidate()
+                    Self.nfcReader.invalidate()
                 } catch {
                     logger.error("⛔️ \(error.localizedDescription)")
-                    nfcReader.invalidate(errorMessage: error.localizedDescription)
+                    Self.nfcReader.invalidate(errorMessage: error.localizedDescription)
                 }
             }
         }
@@ -98,7 +98,7 @@ public struct Scan: View {
         .onReceive(videoSession.$currentCaptureDevice) { device in
             self.currentCaptureDevice = device
         }
-        .onChange(of: currentCaptureDevice) { device in
+        .onChange(of: currentCaptureDevice) { _, device in
             guard let device = device else {
                 return
             }
@@ -518,7 +518,7 @@ public struct Scan: View {
         ExportDataButton("NFC Tag", icon: Image.nfc, isSensitive: false) {
             Task {
                 do {
-                    try await nfcReader.beginSession(alertMessage: "Read a tag containing a UR.")
+                    try await Self.nfcReader.beginSession(alertMessage: "Read a tag containing a UR.")
                 } catch {
                     logger.error("⛔️ \(error.localizedDescription)")
                 }

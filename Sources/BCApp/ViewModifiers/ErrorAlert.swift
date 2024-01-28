@@ -34,7 +34,7 @@ public struct ErrorAlert: ViewModifier {
             } message: {
                 Text(markdown: info?.message ?? "Message")
             }
-            .onChange(of: info) { newValue in
+            .onChange(of: info) { _, newValue in
                 if newValue != nil {
                     Haptic.error()
                 }

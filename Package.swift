@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "BCApp",
     platforms: [
-        .iOS(.v16),
+        .iOS(.v17),
         .macCatalyst(.v16),
     ],
     products: [
@@ -20,7 +20,7 @@ let package = Package(
         .package(url: "https://github.com/wolfmcnally/WolfSwiftUI.git", from: "3.0.0"),
         .package(url: "https://github.com/wolfmcnally/WolfLorem.git", from: "3.0.0"),
         .package(url: "https://github.com/BlockchainCommons/URUI.git", from: "10.0.0"),
-        .package(url: "https://github.com/BlockchainCommons/BCSwiftNFC.git", from: "3.0.0"),
+        .package(url: "https://github.com/BlockchainCommons/BCSwiftNFC.git", from: "4.0.0"),
         .package(url: "https://github.com/gonzalezreal/MarkdownUI.git", from: "1.1.0"),
         .package(url: "https://github.com/wolfmcnally/UIImageColors.git", from: "3.0.0"),
         .package(url: "https://github.com/globulus/swiftui-flow-layout.git", from: "1.0.0")
