@@ -6,7 +6,7 @@ let package = Package(
     name: "BCApp",
     platforms: [
         .iOS(.v17),
-        .macCatalyst(.v16),
+        .macCatalyst(.v17),
     ],
     products: [
         .library(
