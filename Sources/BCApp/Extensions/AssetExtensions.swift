@@ -29,7 +29,11 @@ public extension Asset {
 }
 
 extension Asset: Segment {
-    public var label: AnyView {
+    public var view: AnyView {
         makeSegmentLabel(title: name, icon: icon.eraseToAnyView())
+    }
+    
+    public var accessibilityLabel: String {
+        name
     }
 }

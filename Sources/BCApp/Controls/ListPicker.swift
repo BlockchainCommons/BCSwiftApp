@@ -92,7 +92,7 @@ public struct ListPicker<SegmentType>: View where SegmentType: Segment {
                 }
                 VStack(alignment: .leading, spacing: margin + 5) {
                     ForEach(indexedSegments) { indexedSegment in
-                        indexedSegment.segment.label
+                        indexedSegment.segment.view
                             //.debugBlue()
                             .background(
                                 GeometryReader { segmentLabelGeometry in
@@ -204,7 +204,7 @@ struct ListPickerPickerPreviewView: View {
         let title: String
         let subtitle: String?
         
-        var label: AnyView {
+        var view: AnyView {
             VStack(alignment: .leading) {
                 Text(title)
                     .font(.title)
@@ -216,6 +216,10 @@ struct ListPickerPickerPreviewView: View {
                 }
             }
             .eraseToAnyView()
+        }
+        
+        var accessibilityLabel: String {
+            title
         }
     }
     

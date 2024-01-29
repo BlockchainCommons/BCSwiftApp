@@ -1,7 +1,8 @@
 import SwiftUI
 
 public protocol Segment: Identifiable, Equatable {
-    var label: AnyView { get }
+    var view: AnyView { get }
+    var accessibilityLabel: String { get }
 }
 
 public func makeSegmentLabel<Icon>(title: String? = nil, icon: Icon? = nil) -> AnyView where Icon: View {
@@ -13,7 +14,6 @@ public func makeSegmentLabel<Icon>(title: String? = nil, icon: Icon? = nil) -> A
                 .minimumScaleFactor(0.5)
         }
     }
-    .accessibility(label: Text(title ?? "Untitled"))
     .eraseToAnyView()
 }
 
@@ -21,6 +21,9 @@ struct BasicSegment: Segment {
     let id: UUID = UUID()
     let title: String?
     let icon: AnyView?
+    var accessibilityLabel: String {
+        title ?? "Untitled"
+    }
     
     init(title: String) {
         self.icon = nil
@@ -32,7 +35,7 @@ struct BasicSegment: Segment {
         self.title = title
     }
     
-    var label: AnyView {
+    var view: AnyView {
         makeSegmentLabel(title: title, icon: icon)
     }
     

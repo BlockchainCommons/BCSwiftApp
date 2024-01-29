@@ -42,7 +42,11 @@ public extension Network {
 }
 
 extension Network: Segment {
-    public var label: AnyView {
+    public var view: AnyView {
         makeSegmentLabel(title: name, icon: icon)
+    }
+    
+    public var accessibilityLabel: String {
+        name
     }
 }

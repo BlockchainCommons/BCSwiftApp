@@ -37,7 +37,7 @@ public struct SegmentPicker<SegmentType>: View where SegmentType: Segment {
                 }
                 HStack(spacing: 0) {
                     ForEach(segments) { segment in
-                        segment.label
+                        segment.view
                             .padding([.leading, .trailing], 5)
                             .padding(6)
                             .frame(width: segmentWidth)
@@ -56,6 +56,7 @@ public struct SegmentPicker<SegmentType>: View where SegmentType: Segment {
                             .accessibilityElement(children: .combine)
                             .accessibilityAddTraits(.isButton)
                             .accessibilityRemoveTraits(.isImage)
+                            .accessibilityLabel(Text(segment.accessibilityLabel))
                     }
                     .onPreferenceChange(MaxHeightKey.self) { value in
                         height = value
