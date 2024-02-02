@@ -78,14 +78,16 @@ struct ValidationModifier: ViewModifier {
     public func body(content: Content) -> some View {
         VStack(alignment: .leading, spacing: 5) {
             content
-            guidanceView
-            validationMessage
+            if let latestGuidance {
+                Text(latestGuidance)
+            } else {
+                validationMessage
+            }
         }.onReceive(validationPublisher) { validation in
             withAnimation {
                 self.latestValidation = validation
             }
         }.onReceive(guidancePublisher) { guidanceString in
-            print(guidanceString†)
             if guidanceString != self.latestGuidance {
                 withAnimation {
                     self.latestGuidance = guidanceString
@@ -96,21 +98,16 @@ struct ValidationModifier: ViewModifier {
 
     @ViewBuilder
     public var validationMessage: some View {
-        switch latestValidation {
-        case .valid:
-            EmptyView()
-        case .invalid(let message):
-            let message = message ?? "Invalid."
-            Text(markdown: message)
-                .foregroundColor(Color.red)
-                .font(.caption)
-        }
-    }
-    
-    @ViewBuilder
-    var guidanceView: some View {
-        if let latestGuidance {
-            Text(latestGuidance)
+        if latestGuidance == nil {
+            switch latestValidation {
+            case .valid:
+                EmptyView()
+            case .invalid(let message):
+                let message = message ?? "Invalid."
+                Text(markdown: message)
+                    .foregroundColor(Color.red)
+                    .font(.caption)
+            }
         }
     }
 }
