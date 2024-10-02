@@ -3,6 +3,7 @@ import LifeHash
 import WolfLorem
 import BCFoundation
 
+@MainActor
 public final class LifeHashNameGenerator: ObservableObject {
     @Published public var suggestedName: String?
     private var colorName: String = "none"

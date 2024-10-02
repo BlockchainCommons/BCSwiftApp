@@ -44,7 +44,7 @@ extension UIActivity.ActivityType {
     public static let saveToFiles: UIActivity.ActivityType = .init(rawValue: "com.apple.DocumentManagerUICore.SaveToFiles")
 }
 
-public class ActivityStringSource: UIActivityItemProvider {
+public class ActivityStringSource: UIActivityItemProvider, @unchecked Sendable {
     public let string: String
     public let url: URL
     public let export: Export
@@ -77,7 +77,7 @@ public class ActivityStringSource: UIActivityItemProvider {
     }
 }
 
-public class ActivityImageSource: UIActivityItemProvider {
+public class ActivityImageSource: UIActivityItemProvider, @unchecked Sendable {
     public let url: URL
     public let image: UIImage
     public let export: Export
@@ -112,7 +112,7 @@ public class ActivityImageSource: UIActivityItemProvider {
     }
 }
 
-public class ActivityDataSource: UIActivityItemProvider {
+public class ActivityDataSource: UIActivityItemProvider, @unchecked Sendable {
     public let url: URL
     public let export: Export
 
