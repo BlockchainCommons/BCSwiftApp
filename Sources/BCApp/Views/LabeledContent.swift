@@ -20,7 +20,7 @@ public struct LabeledContent<Label, Content>: View where Label: View, Content: V
 }
 
 fileprivate struct LabeledContentWidth: EnvironmentKey {
-    static var defaultValue: CGFloat? = nil
+    static let defaultValue: CGFloat? = nil
 }
 
 extension EnvironmentValues {

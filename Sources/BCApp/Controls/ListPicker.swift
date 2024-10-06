@@ -131,7 +131,7 @@ public struct ListPicker<SegmentType>: View where SegmentType: Segment {
 }
 
 fileprivate struct WidthKey: PreferenceKey {
-    static var defaultValue: CGFloat?
+    static let defaultValue: CGFloat? = nil
     
     static func reduce(value: inout CGFloat?, nextValue: () -> CGFloat?) {
         value = nextValue()
@@ -183,7 +183,7 @@ private struct SegmentRects: CustomStringConvertible, Equatable {
 }
 
 fileprivate struct SegmentRectsKey: PreferenceKey {
-    static var defaultValue = SegmentRects()
+    static let defaultValue = SegmentRects()
 
     static func reduce(value: inout SegmentRects, nextValue: () -> SegmentRects) {
         value.merge(nextValue())

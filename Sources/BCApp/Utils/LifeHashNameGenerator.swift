@@ -2,28 +2,69 @@ import Foundation
 import LifeHash
 import WolfLorem
 import BCFoundation
+import Observation
 
-@MainActor
-public final class LifeHashNameGenerator: ObservableObject {
-    @Published public var suggestedName: String?
+@MainActor @Observable
+public final class LifeHashNameGenerator {
+    public var suggestedName: String?
     private var colorName: String = "none"
+    private let lifeHashState: LifeHashState?
 
     public init(lifeHashState: LifeHashState?) {
-        guard let lifeHashState = lifeHashState else { return }
-
-        lifeHashState.$osImage
-            .receive(on: DispatchQueue.global())
-            .map { uiImage in
-                guard let uiImage = uiImage else { return "Untitled" }
-                return self.update(image: uiImage)
-            }
-            .receive(on: DispatchQueue.main)
-            .assign(to: &$suggestedName)
+        self.lifeHashState = lifeHashState
         
-        if let image = lifeHashState.osImage {
+        withObservationTracking {
+            guard let image = lifeHashState?.osImage else {
+                return
+            }
+
+            Task {
+                let name = update(image: image)
+                Task { @MainActor in
+                    self.suggestedName = name
+                }
+            }
+        } onChange: {
+            Task { @MainActor in
+                guard let image = lifeHashState?.osImage else {
+                    return
+                }
+                Task {
+                    let name = self.update(image: image)
+                    Task { @MainActor in
+                        self.suggestedName = name
+                    }
+                }
+            }
+        }
+
+
+//        lifeHashState.osImage
+//            .receive(on: DispatchQueue.global())
+//            .map { uiImage in
+//                guard let uiImage = uiImage else { return "Untitled" }
+//                return self.update(image: uiImage)
+//            }
+//            .receive(on: DispatchQueue.main)
+//            .assign(to: suggestedName)
+        
+        if let image = lifeHashState?.osImage {
             suggestedName = update(image: image)
         }
     }
+    
+//    private func handleUpdate() {
+//        guard let image = lifeHashState.osImage else {
+//            return
+//        }
+//
+//        Task {
+//            let name = update(image: image)
+//            Task { @MainActor in
+//                self.suggestedName = name
+//            }
+//        }
+//    }
     
     public func update(image: OSImage) -> String {
         if let matchedColors = getMatchedColors(for: image, quality: .highest) {

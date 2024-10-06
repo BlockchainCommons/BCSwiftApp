@@ -199,19 +199,12 @@ public struct Scan: View {
         }
     }
     
-    func processLoadedImages<T>(_ imageLoaders: [T]) where T: ImageLoader {
-        extractQRCodes(from: imageLoaders) { messages in
-            var remaining = messages.makeIterator()
-            
-            processNext()
-            
-            func processNext() {
-                guard scanResult == nil, let message = remaining.next() else {
-                    return
-                }
-                DispatchQueue.main.async {
+    func processLoadedImages(_ imageLoaders: [ImageLoader]) {
+        Task {
+            let messages = await extractQRCodes(from: imageLoaders)
+            for message in messages {
+                await MainActor.run {
                     model.receive(urString: message)
-                    processNext()
                 }
             }
         }

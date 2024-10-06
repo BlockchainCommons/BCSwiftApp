@@ -1,6 +1,7 @@
 import SwiftUI
 
 public extension Asset {
+    @MainActor
     var image: some View {
         @ViewBuilder
         get {
@@ -15,6 +16,7 @@ public extension Asset {
         }
     }
 
+    @MainActor
     var icon: some View {
         @ViewBuilder
         get {
@@ -23,11 +25,13 @@ public extension Asset {
         }
     }
     
+    @MainActor
     var subtype: ModelSubtype {
         ModelSubtype(id: id, icon: icon.eraseToAnyView())
     }
 }
 
+@MainActor
 extension Asset: Segment {
     public var view: AnyView {
         makeSegmentLabel(title: name, icon: icon.eraseToAnyView())

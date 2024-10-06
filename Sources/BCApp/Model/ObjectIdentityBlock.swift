@@ -4,7 +4,7 @@ import WolfSwiftUI
 import BCFoundation
 
 fileprivate struct OfferedSizeKey: PreferenceKey {
-    static var defaultValue: CGSize?
+    static let defaultValue: CGSize? = nil
 
     static func reduce(value: inout CGSize?, nextValue: () -> CGSize?) {
     }
@@ -17,10 +17,10 @@ public struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
     private let suppressName: Bool
     @State private var activityParams: ActivityParams?
     
-    @StateObject private var lifeHashState: LifeHashState
-    @StateObject private var lifeHashNameGenerator: LifeHashNameGenerator
+    @State private var lifeHashState: LifeHashState
+    @State private var lifeHashNameGenerator: LifeHashNameGenerator
     
-    @StateObject private var detailLifeHashState: LifeHashState
+    @State private var detailLifeHashState: LifeHashState
 
     @State private var chosenSize: CGSize?
     
@@ -100,8 +100,8 @@ public struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
             lifeHashState.fingerprint = model?.fingerprint
             detailLifeHashState.fingerprint = model?.instanceDetailFingerprintable?.fingerprint
         }
-        .onReceive(lifeHashNameGenerator.$suggestedName) { suggestedName in
-            guard let suggestedName = suggestedName else { return }
+        .onChange(of: lifeHashNameGenerator.suggestedName) { _, suggestedName in
+            guard let suggestedName else { return }
             model?.name = suggestedName
         }
         .onChange(of: model) { _, newModel in

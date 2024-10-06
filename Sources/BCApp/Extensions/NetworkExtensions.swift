@@ -1,5 +1,6 @@
 import SwiftUI
 
+@MainActor
 public extension Network {
     var image: Image {
         switch self {

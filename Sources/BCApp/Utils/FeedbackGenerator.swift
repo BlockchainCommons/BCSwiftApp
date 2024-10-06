@@ -1,6 +1,7 @@
 import AudioToolbox
 import UIKit
 
+@MainActor
 public class FeedbackGenerator {
     private let haptic: Haptic?
     private let feedbackGenerator: Any? //UIFeedbackGenerator?

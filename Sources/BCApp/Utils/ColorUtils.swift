@@ -52,7 +52,7 @@ public struct MatchedImageColors {
     public let detail: ImageColorMatch
 }
 
-public struct NamedColor: Decodable {
+public struct NamedColor: Decodable, Sendable {
     public let name: String
     public let color: Colour
 

@@ -1,6 +1,6 @@
 import SwiftUI
 import UIKit
-import PhotosUI
+@preconcurrency import PhotosUI
 
 public extension View {
     func photoPicker(
@@ -50,22 +50,30 @@ public struct PhotoPicker: UIViewControllerRepresentable {
     }
 }
 
-extension PHPickerResult: ImageLoader {
-    public func loadImage(completion: @escaping (Result<UIImage, Error>) -> Void) {
-        itemProvider.loadDataRepresentation(forTypeIdentifier: UTType.image.identifier) { data, error in
-            guard let data = data else {
-                if let error = error {
-                    completion(.failure(error))
-                } else {
-                    completion(.failure(GeneralError("Unknown error loading image.")))
+extension NSItemProvider {
+    func loadDataRepresentation(forTypeIdentifier typeIdentifier: String) async throws -> Data {
+        try await withCheckedThrowingContinuation { continuation in
+            loadDataRepresentation(forTypeIdentifier: typeIdentifier) { data, error in
+                guard let data else {
+                    if let error {
+                        continuation.resume(throwing: error)
+                    } else {
+                        continuation.resume(throwing: GeneralError("Unknown error loading data."))
+                    }
+                    return
                 }
-                return
+                continuation.resume(returning: data)
             }
-            guard let image = UIImage(data: data) else {
-                completion(.failure(GeneralError("Could not form image from data at: \(self)")))
-                return
-            }
-            completion(.success(image))
         }
+    }
+}
+
+extension PHPickerResult: ImageLoader, @retroactive @unchecked Sendable {
+    public func loadImage() async throws -> UIImage {
+        let data = try await itemProvider.loadDataRepresentation(forTypeIdentifier: UTType.image.identifier)
+        guard let image = UIImage(data: data) else {
+            throw GeneralError("Could not form image from data at: \(self)")
+        }
+        return image
     }
 }

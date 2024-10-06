@@ -1,6 +1,7 @@
 import Foundation
 import URUI
 
+@MainActor
 public struct Feedback {
     public static let beep1 = FeedbackGenerator(haptic: .heavy, soundFile: "beep1.mp3", subdirectory: "Sounds")
     public static let beep2 = FeedbackGenerator(haptic: .heavy, soundFile: "beep2.mp3", subdirectory: "Sounds")
@@ -31,6 +32,7 @@ extension Feedback {
     }
 }
 
+@MainActor
 public struct Haptic {
     static let _copy = FeedbackGenerator(haptic: .heavy)
     static let _update = FeedbackGenerator(haptic: .heavy)

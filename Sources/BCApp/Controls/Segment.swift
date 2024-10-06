@@ -1,10 +1,12 @@
 import SwiftUI
 
+@MainActor
 public protocol Segment: Identifiable, Equatable {
     var view: AnyView { get }
     var accessibilityLabel: String { get }
 }
 
+@MainActor
 public func makeSegmentLabel<Icon>(title: String? = nil, icon: Icon? = nil) -> AnyView where Icon: View {
     HStack {
         icon
@@ -39,7 +41,7 @@ struct BasicSegment: Segment {
         makeSegmentLabel(title: title, icon: icon)
     }
     
-    static func ==(lhs: BasicSegment, rhs: BasicSegment) -> Bool {
+    nonisolated static func ==(lhs: BasicSegment, rhs: BasicSegment) -> Bool {
         return lhs.id == rhs.id
     }
 }

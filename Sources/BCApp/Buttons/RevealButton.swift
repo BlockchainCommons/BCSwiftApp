@@ -1,7 +1,7 @@
 import SwiftUI
 
 fileprivate struct MinHeightKey: PreferenceKey {
-    static var defaultValue: Double = .infinity
+    static let defaultValue: Double = .infinity
     
     static func reduce(value: inout Double, nextValue: () -> Double) {
         value = min(value, nextValue())
@@ -64,7 +64,7 @@ public struct RevealButton<RevealedContent, HiddenContent>: View where RevealedC
             .clipped()
         }
         .onAppear {
-            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 didAppear = true
             }
         }

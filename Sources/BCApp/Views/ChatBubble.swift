@@ -52,7 +52,7 @@ public struct ChatBubble<Content, Fill>: View where Content: View, Fill: View {
         }
     }
     
-    static func isLeftBubble(direction: Direction, layoutDirection: LayoutDirection) -> Bool {
+    nonisolated static func isLeftBubble(direction: Direction, layoutDirection: LayoutDirection) -> Bool {
         switch layoutDirection {
         case .leftToRight:
             switch direction {

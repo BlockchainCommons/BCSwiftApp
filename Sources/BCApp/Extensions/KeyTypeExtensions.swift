@@ -1,6 +1,7 @@
 import SwiftUI
 import BCFoundation
 
+@MainActor
 public extension KeyType {
     @ViewBuilder
     var icon: some View {

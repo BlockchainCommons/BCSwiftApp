@@ -2,6 +2,7 @@ import Foundation
 import BCFoundation
 
 public extension UseInfo {
+    @MainActor
     var subtypes: [ModelSubtype] {
         switch asset {
         case .btc, .eth:

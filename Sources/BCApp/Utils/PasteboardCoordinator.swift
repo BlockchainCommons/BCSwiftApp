@@ -4,9 +4,11 @@ import MobileCoreServices
 import BCFoundation
 import Dispatch
 import UniformTypeIdentifiers
+import Observation
 
+@Observable @MainActor
 final class PasteboardCoordinator: ObservableObject {
-    @Published var isConfirmationPresented: Bool = false
+    var isConfirmationPresented: Bool = false
     
     private init() { }
     
@@ -41,7 +43,9 @@ final class PasteboardCoordinator: ObservableObject {
         }
         Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
             withAnimation(.easeIn(duration: 0.2)) {
-                self.isConfirmationPresented = false
+                DispatchQueue.main.async {
+                    self.isConfirmationPresented = false
+                }
             }
         }
     }

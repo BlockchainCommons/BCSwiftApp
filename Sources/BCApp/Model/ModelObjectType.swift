@@ -13,6 +13,7 @@ public struct ModelObjectType {
     }
 }
 
+@MainActor
 public extension ModelObjectType {
     static let seed = ModelObjectType(name: "Seed", type: "Seed", icon: Image.seed.icon().eraseToAnyView())
     static let privateHDKey = ModelObjectType(name: "Private HD Key", type: "PrivateHDKey", icon: KeyType.private.icon.eraseToAnyView())

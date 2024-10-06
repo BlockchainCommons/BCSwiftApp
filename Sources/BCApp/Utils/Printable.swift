@@ -37,7 +37,7 @@ public struct PrintablePages: Printable {
         return views
     }
     
-    public static func ==(lhs: PrintablePages, rhs: PrintablePages) -> Bool {
+    nonisolated public static func ==(lhs: PrintablePages, rhs: PrintablePages) -> Bool {
         lhs.id == rhs.id
     }
 }
@@ -53,6 +53,7 @@ public struct AnyPrintable: Printable {
     let _printPages: () -> [AnyView]
     public let id = UUID()
 
+    @MainActor
     public init<P: Printable>(_ p: P) {
         self._name = {
             p.name
@@ -81,6 +82,7 @@ public struct AnyPrintable: Printable {
 }
 
 public extension Printable {
+    @MainActor
     func eraseToAnyPrintable() -> AnyPrintable {
         AnyPrintable(self)
     }
